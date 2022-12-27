@@ -1,0 +1,8 @@
+html, body {
+    height: 100%;
+}
+
+.error-text {
+    font-size: 0.8em;
+    color: #ff0000;
+}
