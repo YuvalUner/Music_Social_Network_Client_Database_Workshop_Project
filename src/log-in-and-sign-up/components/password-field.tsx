@@ -8,9 +8,8 @@ class PasswordField extends React.Component<any, any>{
         super(props);
         this.state = {
             showPassword: false
-        }
+        };
     }
-
 
 
     handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -18,10 +17,15 @@ class PasswordField extends React.Component<any, any>{
 
     render() {
         return (
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <FormControl
+                required
+                error = {this.props.error}
+                sx={{ m: 1, width: '25ch' }}
+                variant="outlined">
+                <InputLabel htmlFor="outlined-adornment-password">{this.props.text}</InputLabel>
                 <OutlinedInput
-                    id="outlined-adornment-password"
+                    value={this.props.value}
+                    onChange={this.props.setter}
                     type={this.state.showPassword ? 'text' : 'password'}
                     endAdornment={
                         <InputAdornment position="end">
@@ -35,7 +39,7 @@ class PasswordField extends React.Component<any, any>{
                             </IconButton>
                         </InputAdornment>
                     }
-                    label="Password"
+                    label={this.props.text}
                 />
             </FormControl>
         )
