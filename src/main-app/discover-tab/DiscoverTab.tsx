@@ -34,6 +34,12 @@ class DiscoverTab extends React.Component<any, any>{
         this.setState({recommendationsLoading: false, recommendations: recommendations});
     }
 
+    switchToSongPage = (song_name: string, album_name: string): void => {
+        this.props.setSongName(song_name);
+        this.props.setAlbumName(album_name);
+        this.props.setPage("song");
+    }
+
 
 
     createRecommendationsList = (): JSX.Element => {
@@ -49,9 +55,11 @@ class DiscoverTab extends React.Component<any, any>{
                                 <List>
                                     {this.state.recommendations[key].map((song: any) => {
                                         return(
-                                            <ListItemButton>
+                                            <ListItemButton
+                                                key={Md5.hashStr(`${song.song_name}${song.artists}${song.album_name}`)}
+                                                onClick={() => this.switchToSongPage(song.song_name, song.album_name)}
+                                            >
                                                 <ListItemText
-                                                    key={Md5.hashStr(`${song.song_name}${song.artists}${song.album_name}`)}
                                                     primary={song.song_name}
                                                     secondary={song.artists}/>
                                             </ListItemButton>
@@ -78,6 +86,11 @@ class DiscoverTab extends React.Component<any, any>{
         this.setState({topArtistsLoading: false, topArtists: artists});
     }
 
+    switchToArtistPage = (artist: string): void => {
+        this.props.setArtistName(artist);
+        this.props.setPage("artist");
+    }
+
     createTopArtistsList = (): JSX.Element => {
         return(
             <div>
@@ -88,9 +101,10 @@ class DiscoverTab extends React.Component<any, any>{
                                 <div>
                                     {this.state.topArtists[key].map((artist: any) => {
                                         return(
-                                            <ListItemButton>
+                                            <ListItemButton
+                                                key={Md5.hashStr(`${artist[0]}${artist[1]}`)}
+                                                onClick={() => this.switchToArtistPage(artist[0])}>
                                                 <ListItemText
-                                                    key={Md5.hashStr(`${artist[0]}${artist[1]}`)}
                                                     primary={artist[0]}
                                                     secondary={`Rating:
                                                      ${parseFloat(artist[1]).toFixed(2)}`}/>
