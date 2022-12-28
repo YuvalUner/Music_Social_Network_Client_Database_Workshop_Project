@@ -1,11 +1,11 @@
 import React from "react";
 import UsernameField from "./components/username-field";
 import PasswordField from "./components/password-field";
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import configData from "../config.json";
 import {Alert, AlertTitle} from "@mui/material";
 
-class SignUpPage extends React.Component<any, any>{
+class SignUpPage extends React.Component<any, any> {
     /**
      * The application's sign up page
      * @param props
@@ -26,15 +26,15 @@ class SignUpPage extends React.Component<any, any>{
     }
 
 
-    setPassword = (e: any) => {
+    setPassword = (e: any): void => {
         this.setState({password: e.target.value});
     }
 
-    setPasswordConfirmation = (e: any) => {
+    setPasswordConfirmation = (e: any): void => {
         this.setState({passwordConfirmation: e.target.value});
     }
 
-    setUsername = (e: any) => {
+    setUsername = (e: any): void => {
         this.setState({username: e.target.value});
     }
 
@@ -46,8 +46,7 @@ class SignUpPage extends React.Component<any, any>{
         if (this.state.password === "" || this.state.passwordConfirmation === "") {
             this.setState({passwordError: true});
             return false;
-        }
-        else if (this.state.password !== this.state.passwordConfirmation) {
+        } else if (this.state.password !== this.state.passwordConfirmation) {
             this.setState({error: true});
             return false;
         } else {
@@ -61,7 +60,7 @@ class SignUpPage extends React.Component<any, any>{
      * @returns {boolean} True if the form is valid, false if it isn't
      */
     isValid = (): boolean => {
-        if (this.state.username === ""){
+        if (this.state.username === "") {
             this.setState({usernameError: true, usernameEmptyError: true});
             return false;
         }
@@ -72,10 +71,10 @@ class SignUpPage extends React.Component<any, any>{
      * Handles the submission of the form
      * If the passwords match, sends a POST request to the API to create a new user
      */
-    onSubmit = async (event: any) => {
+    onSubmit = async (event: any): Promise<void> => {
         event.preventDefault();
-        if (this.isValid()){
-            const response = await fetch(`${configData.apiBaseUrl}/${configData.artistApiUrl}/add`, {
+        if (this.isValid()) {
+            const response: Response = await fetch(`${configData.apiBaseUrl}/${configData.artistApiUrl}/add`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -85,11 +84,12 @@ class SignUpPage extends React.Component<any, any>{
                     password: this.state.password
                 }),
             });
-            if (response.status === 201){
-                this.setState({signUpSuccess: true, usernameError: false,
-                    passwordError: false, duplicateError: false});
-            }
-            else{
+            if (response.status === 201) {
+                this.setState({
+                    signUpSuccess: true, usernameError: false,
+                    passwordError: false, duplicateError: false
+                });
+            } else {
                 this.setState({duplicateError: true, usernameError: false});
             }
         }
@@ -106,37 +106,40 @@ class SignUpPage extends React.Component<any, any>{
                             value={this.state.username}
                             setter={this.setUsername}
                             error={this.state.usernameError}
-                            text={"daddadadadadad"}>
+                            id={"sign-up-username"}>
                         </UsernameField>
-                        {this.state.usernameEmptyError && <div className={"error-text"}>
-                            You must fill in this field
-                        </div>}
+                        {this.state.usernameEmptyError &&
+                            <Alert severity="error">Username must not be empty</Alert>
+                        }
                     </div>
                     <div className={"mb-3"}>
                         <PasswordField
                             text={"Password"}
                             error={this.state.passwordError}
                             value={this.state.password}
-                            setter={this.setPassword}>
+                            setter={this.setPassword}
+                            id={"sign-up-password"}>
                         </PasswordField>
-                        {this.state.passwordError && <div className={"error-text"}>
-                            Passwords do not match or are empty
-                        </div>}
+                        {this.state.passwordError &&
+                            <Alert severity="error">Passwords do not match or are empty</Alert>
+                        }
                     </div>
                     <div className={"mb-3"}>
                         <PasswordField
                             text={"Confirm password"}
                             error={this.state.passwordError}
                             value={this.state.passwordConfirmation}
-                            setter={this.setPasswordConfirmation}>
+                            setter={this.setPasswordConfirmation}
+                            id={"sign-up-pass-confirm"}>
                         </PasswordField>
-                        {this.state.passwordError && <div className={"error-text"}>
-                            Passwords do not match or are empty
-                        </div>}
+                        {this.state.passwordError &&
+                            <Alert severity="error">Passwords do not match or are empty</Alert>
+                        }
                     </div>
                     <div className={"mb-3"}>
                         <button onClick={async (e) => await this.onSubmit(e)}
-                                type="submit" className={"btn btn-primary"}>Sign up</button>
+                                type="submit" className={"btn btn-primary"}>Sign up
+                        </button>
                     </div>
                     {this.state.signUpSuccess && <Alert severity="success">
                         <AlertTitle>Success</AlertTitle>
