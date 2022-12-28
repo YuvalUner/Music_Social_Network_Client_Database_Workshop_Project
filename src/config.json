@@ -1,4 +1,7 @@
 {
   "apiBaseUrl": "http://localhost:8080",
-  "artistApiUrl": "/artists"
+  "artistApiUrl": "/artists",
+  "albumApiUrl": "/albums",
+  "songsApiUrl": "/songs",
+  "testUser": "a@g.com"
 }
