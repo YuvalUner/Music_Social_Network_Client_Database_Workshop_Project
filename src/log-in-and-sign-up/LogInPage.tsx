@@ -65,6 +65,7 @@ class LogInPage extends React.Component<any, any>{
             const data = await response.json();
             if (data.result) {
                 this.props.setIsLoggedIn(true);
+                this.props.setUsername(this.state.username);
                 // Scuffed as hell way to navigate, thanks to react-router-dom v6 being a pain in the ass
                 let link_to_home: HTMLElement | null = document.getElementById("nav-to-home-hidden");
                 if (link_to_home != null){
