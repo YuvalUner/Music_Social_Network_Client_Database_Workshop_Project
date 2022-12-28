@@ -21,11 +21,11 @@ class LogInPage extends React.Component<any, any>{
         };
     }
 
-    setPassword = (e: any) => {
+    setPassword = (e: any): void => {
         this.setState({password: e.target.value});
     }
 
-    setUsername = (e: any) => {
+    setUsername = (e: any): void => {
         this.setState({username: e.target.value});
     }
 
@@ -49,10 +49,10 @@ class LogInPage extends React.Component<any, any>{
      * Checks if the form is valid
      * If it is, submits it to the server and logs the user in if the credentials are valid
      */
-    onSubmit = async (e: any) => {
+    onSubmit = async (e: any): Promise<void> => {
         e.preventDefault();
         if (this.checkEmpty()) {
-            const response = await fetch(`${configData.apiBaseUrl}/${configData.artistApiUrl}/login`, {
+            const response: Response = await fetch(`${configData.apiBaseUrl}/${configData.artistApiUrl}/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,8 +66,13 @@ class LogInPage extends React.Component<any, any>{
             if (data.result) {
                 this.props.setIsLoggedIn(true);
                 // Scuffed as hell way to navigate, thanks to react-router-dom v6 being a pain in the ass
-                let link_to_home = document.getElementById("nav-to-home-hidden");
-                link_to_home.click();
+                let link_to_home: HTMLElement | null = document.getElementById("nav-to-home-hidden");
+                if (link_to_home != null){
+                    link_to_home.click();
+                }
+                else{
+                    throw new Error("Someone deleted the link to home page on the log in page, please undo this")
+                }
             } else {
                 this.setState({invalidError: true, usernameError: true, passwordError: true});
             }
@@ -87,21 +92,23 @@ class LogInPage extends React.Component<any, any>{
                             value={this.state.username}
                             setter={this.setUsername}
                             error={this.state.usernameError}
+                            id={"log-in-username"}
                             ></UsernameField>
-                            {this.state.usernameEmptyError && <div className={"error-text"}>
-                                You must fill in this field
-                            </div>}
+                            {this.state.usernameEmptyError &&
+                                <Alert severity="error">Username must not be empty</Alert>
+                            }
                         </div>
                         <div className={"mb-3"}>
                             <PasswordField
                                 text={"Password"}
                                 error={this.state.passwordError}
                                 value={this.state.password}
-                                setter={this.setPassword}>
+                                setter={this.setPassword}
+                                id={"log-in-password"}>
                             </PasswordField>
-                            {this.state.passwordEmptyError && <div className={"error-text"}>
-                                You must fill in this field
-                            </div>}
+                            {this.state.passwordEmptyError &&
+                                <Alert severity="error">Password must not be empty</Alert>
+                            }
                         </div>
                         <div className={"mb-3"}>
                             <button type="submit" className={"btn btn-primary"}

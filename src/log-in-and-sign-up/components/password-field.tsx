@@ -21,8 +21,9 @@ class PasswordField extends React.Component<any, any>{
                 required
                 error = {this.props.error}
                 sx={{ m: 1, width: '25ch' }}
-                variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">{this.props.text}</InputLabel>
+                variant="outlined"
+                id = {this.props.id}>
+                <InputLabel htmlFor={this.props.id}>{this.props.text}</InputLabel>
                 <OutlinedInput
                     value={this.props.value}
                     onChange={this.props.setter}
