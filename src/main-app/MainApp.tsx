@@ -11,8 +11,10 @@ import AlbumPage from "./album-page/AlbumPage";
 import ArtistRecommendationPage from "./artist-recommendation-page/ArtistRecommendationPage";
 import AlbumRecommendationsPage from "./album-recommendations-page/AlbumRecommendationsPage";
 import AddAlbumPage from "./add-album-page/AddAlbumPage";
+import {Box, CssBaseline, Divider, Stack} from "@mui/material";
+import SearchTab from "./search-tab/SearchTab";
 
-class MainApp extends React.Component<any, any>{
+class MainApp extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -23,6 +25,9 @@ class MainApp extends React.Component<any, any>{
             album_name: "",
         }
     }
+
+    discoverTabWidth = 20;
+    sideTabWidth = 20;
 
     setArtistName = (artist_name: string | [string]): void => {
         this.setState({artist_name: artist_name});
@@ -42,7 +47,11 @@ class MainApp extends React.Component<any, any>{
 
     render() {
         return (
-            <div className={"h-100"}>
+            <Box sx={{
+                    display: "flex"
+                }}
+            >
+                <CssBaseline />
                 <DiscoverTab
                     username={this.props.username}
                     setArtistName={this.setArtistName}
@@ -50,28 +59,41 @@ class MainApp extends React.Component<any, any>{
                     setPage={this.setPage}
                     setAlbumName={this.setAlbumName}
                     setArtists={this.setArtistName}
+                    width={this.discoverTabWidth}
                 />
-                <div className={"d-flex align-items-center justify-content-center"}>
-                    {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
-                    {this.state.page === PageEnum.ALBUM && <AlbumPage album_name={this.state.album_name}></AlbumPage>}
-                    {this.state.page === PageEnum.ARTIST && <ArtistPage></ArtistPage>}
-                    {this.state.page === PageEnum.SONG && <SongPage
-                        albumName={this.state.album_name}
-                        songName={this.state.song_name}
-                        artists={this.state.artist_name}
-                        username={this.props.username}>
-                    </SongPage>}
-                    {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
-                    {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage/>}
-                    {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
-                    {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
-                    {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
-                </div>
+                <Box
+                    component="main"
+                    sx={{ flexGrow: 1, p: 3, marginLeft: `${this.discoverTabWidth}%`, marginRight: `${this.sideTabWidth}%` }}
+                >
+                    <Stack sx={{
+                    }}
+                           divider={<Divider orientation="vertical" flexItem/>}
+                           spacing={2}
+                    >
+                        <SearchTab/>
+                        {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
+                        {this.state.page === PageEnum.ALBUM &&
+                            <AlbumPage album_name={this.state.album_name}></AlbumPage>}
+                        {this.state.page === PageEnum.ARTIST && <ArtistPage></ArtistPage>}
+                        {this.state.page === PageEnum.SONG && <SongPage
+                            albumName={this.state.album_name}
+                            songName={this.state.song_name}
+                            artists={this.state.artist_name}
+                            username={this.props.username}>
+                        </SongPage>}
+                        {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
+                        {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage/>}
+                        {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
+                        {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
+                        {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
+                    </Stack>
+                </Box>
                 <MenuSideBar
                     username={this.props.username}
                     setPage={this.setPage}
+                    width={this.sideTabWidth}
                 />
-            </div>
+            </Box>
         );
     }
 }

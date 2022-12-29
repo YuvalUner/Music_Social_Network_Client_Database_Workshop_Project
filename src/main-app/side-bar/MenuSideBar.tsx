@@ -88,7 +88,7 @@ class MenuSideBar extends React.Component<any, any>{
                 variant="permanent"
                 sx={{
                     display: { xs: 'none', sm: 'block' },
-                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: `${this.props.width}%` },
                 }}
                 anchor={"right"}
                 open

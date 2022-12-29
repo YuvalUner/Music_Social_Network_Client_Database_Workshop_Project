@@ -91,18 +91,11 @@ class SongPage extends React.Component<any, any> {
                 divider={<Divider orientation="vertical" flexItem />}
             >
                 {this.state.songLoading ? <div>Loading...</div> : this.createSongInfoTable()}
-                <Box
-                    sx={{
-                        width: 500,
-                        height: 300
-                    }}
-                >
                     <CommentsSection
                         songName={this.props.songName}
                         albumName={this.props.albumName}
                         username={this.props.username}
                         key={this.props.songName + this.props.albumName}/>
-                </Box>
             </Stack>
         );
     }

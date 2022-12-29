@@ -5,6 +5,9 @@ enum PageEnum{
     ALBUM = 3,
     FAVORITE_SONGS = 4,
     ADD_SONG = 5,
+    ADD_ALBUM = 6,
+    ALBUM_RECOMMENDATION = 7,
+    ARTIST_RECOMMENDATION = 8,
 }
 
 export default PageEnum;
