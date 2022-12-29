@@ -13,5 +13,35 @@
         "artist_name": "Nikolaj Znaider",
         "comment": "This song is terrible!",
         "rating": 2
+    },
+    {
+        "artist_name": "Taylor Swift",
+        "comment": "Great",
+        "rating": 5
+    },
+    {
+        "artist_name": "Rage Against The Machine",
+        "comment": "Great",
+        "rating": 5
+    },
+    {
+        "artist_name": "Nikolaj Znaider",
+        "comment": "This song is terrible!",
+        "rating": 2
+    },
+    {
+        "artist_name": "Taylor Swift",
+        "comment": "Great",
+        "rating": 5
+    },
+    {
+        "artist_name": "Rage Against The Machine",
+        "comment": "Great",
+        "rating": 5
+    },
+    {
+        "artist_name": "Nikolaj Znaider",
+        "comment": "This song is terrible!",
+        "rating": 2
     }
 ]

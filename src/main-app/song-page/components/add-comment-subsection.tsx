@@ -48,6 +48,10 @@ class AddCommentSubsection extends React.Component<any, any> {
     //     }
     // }
 
+    componentDidMount() {
+        this.setState({comment: ""});
+    }
+
     async addComment(event: any) {
         event.preventDefault();
         if (this.checkComment()) {
@@ -73,7 +77,7 @@ class AddCommentSubsection extends React.Component<any, any> {
                                }}
                     />
                     <Rating className={"mt-3 ms-2 col-3"}
-                            name="simple-controlled"
+                            name="add-comment-rating"
                             value={this.state.rating}
                             defaultValue={1}
                             onChange={(event, newValue) => {

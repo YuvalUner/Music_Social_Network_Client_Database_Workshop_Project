@@ -1,7 +1,15 @@
 import React from "react";
 import commentsExample from "../comments_example.json";
-import StarIcon from "@mui/icons-material/Star";
-import {CircularProgress, List, ListItem, ListItemAvatar, ListItemText, ListSubheader, Typography} from "@mui/material";
+import {
+    Avatar,
+    CircularProgress,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+    Rating,
+    Typography
+} from "@mui/material";
 import {Md5} from "ts-md5";
 import AddCommentSubsection from "./add-comment-subsection";
 
@@ -35,33 +43,22 @@ class CommentsSection extends React.Component<any, any> {
         await this.getComments();
     }
 
-    createStars = (rating: number): JSX.Element => {
-        let stars: number[] = [];
-        for (let i = 0; i < rating; i++) {
-            stars.push(i);
-        }
-        return (
-            <>
-                {stars.map((star: number) => {
-                    return (
-                        <StarIcon key={star}/>
-                    );
-                })}
-            </>
-        );
-    }
-
     createCommentsList = (): JSX.Element => {
         return (
             <div>
-                <List>
+                <List
+                    sx={{
+                        height:200,
+                        overflow: "auto"
+                    }}
+                >
                     {this.state.comments.map((comment: any) => {
                         return (
                             <ListItem
                                 key={Md5.hashStr
                                 (`${comment.artist_name}${comment.comment}${comment.rating}`)}>
                                 <ListItemAvatar>
-
+                                    <Avatar alt={comment.artist_name}/>
                                 </ListItemAvatar>
                                 <ListItemText
                                     primary={comment.comment}
@@ -75,25 +72,20 @@ class CommentsSection extends React.Component<any, any> {
                                             >
                                                 {comment.artist_name}
                                             </Typography>
-                                            — rated this song {this.createStars(parseFloat(comment.rating))}
+                                            — rated this song <Rating size={"small"} readOnly value={parseInt(comment.rating)}/>
                                         </React.Fragment>
                                     }
                                 />
                             </ListItem>
                         );
                     })}
-                    <ListSubheader>
-                        <div>
-                            <Typography variant={"h5"}>Add a comment</Typography>
-                        </div>
-                        <AddCommentSubsection
-                            username={this.props.username}
-                            songName={this.props.songName}
-                            albumName={this.props.albumName}
-                            refreshComments={this.getComments}
-                        />
-                    </ListSubheader>
                 </List>
+                <AddCommentSubsection
+                    username={this.props.username}
+                    songName={this.props.songName}
+                    albumName={this.props.albumName}
+                    refreshComments={this.getComments}
+                />
             </div>
         );
     }

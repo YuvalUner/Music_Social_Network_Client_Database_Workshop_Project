@@ -1,6 +1,9 @@
 import React from "react";
 import songExample from "./song_example.json";
 import CommentsSection from "./components/comments-section";
+import {Box, Divider, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
+import SongPrimaryCard from "./components/song-primary-card";
+import scaleNumToWordMapper from "./scale-num-to-word-mapper";
 
 class SongPage extends React.Component<any, any> {
 
@@ -36,27 +39,71 @@ class SongPage extends React.Component<any, any> {
     }
 
     createSongInfoTable = (): JSX.Element => {
-        return(
+        return (
             <div>
-                <h1>{this.state.song.song_name}</h1>
-                <h2>{this.props.albumName}</h2>
-                <h3>{this.props.artists}</h3>
-                <h4>{this.state.song.energy}</h4>
+                <SongPrimaryCard
+                    songName={this.state.song.song_name}
+                    albumName={this.props.albumName}
+                    artists={this.props.artists}
+                />
+                <Table>
+                    <TableRow>
+                        <TableCell>Artist(s)</TableCell>
+                        <TableCell>{this.props.artists}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Album</TableCell>
+                        <TableCell>{this.props.albumName}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Release date</TableCell>
+                        <TableCell>{this.state.song.release_date}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Energy</TableCell>
+                        <TableCell>{this.state.song.energy}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Key</TableCell>
+                        <TableCell>
+                            {`${scaleNumToWordMapper(this.state.song.key)} ${this.state.song.is_major === 0 ? "minor" : "major"}`}
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Spotify link</TableCell>
+                        <TableCell><Link
+                            href={`https://open.spotify.com/track/${this.state.song.song_spotify_id}`}
+                            target="_blank"
+                        >
+                            {`https://open.spotify.com/track/${this.state.song.song_spotify_id}`}
+                        </Link></TableCell>
+                    </TableRow>
+                </Table>
             </div>
         );
     }
 
 
-
     render() {
         return (
-            <div className={"d-flex align-items-center justify-content-center"}>
+            <Stack
+                spacing={2}
+                divider={<Divider orientation="vertical" flexItem />}
+            >
                 {this.state.songLoading ? <div>Loading...</div> : this.createSongInfoTable()}
-                <CommentsSection
-                    songName={this.props.songName}
-                    albumName={this.props.albumName}
-                    username={this.props.username}/>
-            </div>
+                <Box
+                    sx={{
+                        width: 500,
+                        height: 300
+                    }}
+                >
+                    <CommentsSection
+                        songName={this.props.songName}
+                        albumName={this.props.albumName}
+                        username={this.props.username}
+                        key={this.props.songName + this.props.albumName}/>
+                </Box>
+            </Stack>
         );
     }
 }

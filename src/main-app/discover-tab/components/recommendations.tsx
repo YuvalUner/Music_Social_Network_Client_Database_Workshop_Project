@@ -44,7 +44,7 @@ class Recommendations extends React.Component<any, any>{
                 <List>
                     {Object.keys(this.state.recommendations).map((key: any) => {
                         return(
-                            <div>
+                            <div key={key}>
                                 <div>
                                     Because you liked {key}:<br/>
                                 </div>

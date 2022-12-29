@@ -39,7 +39,7 @@ class TopArtists extends React.Component<any, any> {
                     {
                         Object.keys(this.state.topArtists).map((key: any) => {
                             return (
-                                <div>
+                                <div key={key}>
                                     {this.state.topArtists[key].map((artist: any) => {
                                         return (
                                             <ListItemButton
