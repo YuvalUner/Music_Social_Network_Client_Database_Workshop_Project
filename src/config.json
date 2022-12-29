@@ -3,5 +3,5 @@
   "artistApiUrl": "/artists",
   "albumApiUrl": "/albums",
   "songsApiUrl": "/songs",
-  "testUser": "a@g.com"
+  "commentsApiUrl": "/comments"
 }

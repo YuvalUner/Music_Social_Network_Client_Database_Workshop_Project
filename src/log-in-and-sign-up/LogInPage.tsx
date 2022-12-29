@@ -83,7 +83,7 @@ class LogInPage extends React.Component<any, any>{
     render() {
         return (
                 <>
-                    <NavLink to="/home" id={"nav-to-home-hidden"} hidden={true}></NavLink>
+                    <NavLink to="/" id={"nav-to-home-hidden"} hidden={true}></NavLink>
                 <div className={"h-100 d-flex align-items-center justify-content-center"}>
                     <form className={"border border-primary-subtle rounded pe-4 ps-4 pt-2 pb-2"}
                           onSubmit={async e => await this.onSubmit(e)}>
