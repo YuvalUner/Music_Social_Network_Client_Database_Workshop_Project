@@ -16,23 +16,23 @@ class SearchResultsPage extends React.Component<any, any> {
         }
     }
 
-    // getSearchResults = async (): Promise<void> => {
-    //     let searchTypeStr: string = this.props.searchType === SearchTypes.EXACT ? "exact" : "approx";
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/${searchTypeStr}/${this.props.searchQuery}`, {
-    //         method: "GET",
-    //     })
-    //     if (response.status === 200) {
-    //         let searchResults: any = await response.json();
-    //         this.setState({searchResults: searchResults, searchResultsLoading: false});
-    //     }
-    //     else{
-    //         this.setState({searchResultsLoading: false});
-    //     }
-    // }
-
     getSearchResults = async (): Promise<void> => {
-        this.setState({searchResults: searchResults, searchResultsLoading: false});
+        let searchTypeStr: string = this.props.searchType === SearchTypes.EXACT ? "exact" : "approx";
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/${searchTypeStr}/${this.props.searchQuery}`, {
+            method: "GET",
+        })
+        if (response.status === 200) {
+            let searchResults: any = await response.json();
+            this.setState({searchResults: searchResults, searchResultsLoading: false});
+        }
+        else{
+            this.setState({searchResultsLoading: false});
+        }
     }
+
+    // getSearchResults = async (): Promise<void> => {
+    //     this.setState({searchResults: searchResults, searchResultsLoading: false});
+    // }
 
     async componentDidMount() {
         await this.getSearchResults();

@@ -12,6 +12,7 @@ import ArtistRecommendationPage from "./artist-recommendation-page/ArtistRecomme
 import AlbumRecommendationsPage from "./album-recommendations-page/AlbumRecommendationsPage";
 import AddAlbumPage from "./add-album-page/AddAlbumPage";
 import {Box, CssBaseline, Divider, Stack} from "@mui/material";
+import SearchTypes from "./search/search-type-enum";
 import SearchTab from "./search/SearchTab";
 import SearchResultsPage from "./search/SearchResultsPage";
 import TopSongPage from "./top-songs-page/TopSongPage";
@@ -26,7 +27,7 @@ class MainApp extends React.Component<any, any> {
             song_name: "",
             album_name: "",
             searchQuery: "",
-            searchType: "",
+            searchType: SearchTypes.EXACT,
         }
     }
 
@@ -45,8 +46,8 @@ class MainApp extends React.Component<any, any> {
         this.setState({album_name: album_name});
     }
 
-    setSearchType = (e: any): void => {
-        this.setState({searchType: e.target.value});
+    setSearchType = (searchType: string): void => {
+        this.setState({searchType: parseInt(searchType)});
     }
 
     setSearchQuery = (e: any): void => {
@@ -111,6 +112,7 @@ class MainApp extends React.Component<any, any> {
                             setArtistName={this.setArtistName}
                             setSongName={this.setSongName}
                             setAlbumName={this.setAlbumName}
+                            key={this.state.searchQuery + this.state.searchType}
                         />}
                         {this.state.page === PageEnum.TOP_SONGS && <TopSongPage/>}
                     </Stack>

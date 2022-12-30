@@ -18,7 +18,8 @@ class SearchTab extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            searchError: false
+            searchError: false,
+            searchType: SearchTypes.EXACT,
         }
     }
 
@@ -36,7 +37,12 @@ class SearchTab extends React.Component<any, any> {
         e.preventDefault();
         if (this.checkValidity()) {
             this.props.setPage(PageEnum.SEARCH_RESULTS);
+            this.props.setSearchType(this.state.searchType);
         }
+    }
+
+    setSearchType = (e: any): void => {
+        this.setState({searchType: (e.target as HTMLInputElement).value});
     }
 
     render() {
@@ -77,15 +83,16 @@ class SearchTab extends React.Component<any, any> {
                         <RadioGroup
                             row
                             name={"search-type-radio"}
-                            value={this.props.searchType}
-                            onChange={this.props.setSearchType}
+                            value={this.state.searchType}
+                            onChange={this.setSearchType}
                             defaultValue={SearchTypes.EXACT}
                         >
                             <FormControlLabel defaultChecked={true} value={SearchTypes.EXACT} control={<Radio sx={{
                                 '& .MuiSvgIcon-root': {
                                     fontSize: 14,
                                 }
-                            }}/>} label={"Exact Search"}/>
+                            }}/>} label={"Exact Search"}
+                            />
                             <FormControlLabel value={SearchTypes.APPROXIMATE} control={<Radio sx={{
                                 '& .MuiSvgIcon-root': {
                                     fontSize: 14,
