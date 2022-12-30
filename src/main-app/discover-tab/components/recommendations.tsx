@@ -1,8 +1,10 @@
 import React from "react";
 import recommendations from "../recommendations_example.json";
 import PageEnum from "../../page-enum";
-import {CircularProgress, List, ListItemButton, ListItemText} from "@mui/material";
+import {CircularProgress, IconButton, List, ListItemButton, ListItemText} from "@mui/material";
 import {Md5} from "ts-md5";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import configData from "../../../config.json";
 
 class Recommendations extends React.Component<any, any>{
 
@@ -15,6 +17,7 @@ class Recommendations extends React.Component<any, any>{
     }
 
     // getRecommendations = async (): Promise<void> => {
+    //     this.setState({recommendationsLoading: true});
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_reccomendations/${this.props.username}/10`, {
     //         method: "GET",
     //     });
@@ -78,6 +81,12 @@ class Recommendations extends React.Component<any, any>{
     render() {
         return(
             <>
+                <IconButton
+                    onClick={async () => this.getRecommendations()}
+                    title={"Refresh recommendations"}
+                >
+                    <RefreshIcon color={"primary"}/>
+                </IconButton>
                 {this.state.recommendationsLoading &&
                     <div>
                         <div className={"mb-5"}>

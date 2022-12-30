@@ -1,0 +1,32 @@
+[
+  {
+    "album_name": "Name",
+    "album_spotify_id": "3KkQLAlnRbv8YuX2hG4sCu",
+    "artist_spotify_id": null,
+    "artists": [
+      "Scott Stapp"
+    ],
+    "duration": 247533,
+    "energy": 0.818,
+    "is_major": 1,
+    "key": 1,
+    "release_date": "Tue, 23 Apr 2019 00:00:00 GMT",
+    "song_name": "Name",
+    "song_spotify_id": "6oE1c01yZ35pIEikvqilAQ"
+  },
+  {
+    "album_name": "Rage Against The Machine",
+    "album_spotify_id": "4LaRYkT4oy47wEuQgkLBul",
+    "artist_spotify_id": null,
+    "artists": [
+      "Rage Against The Machine"
+    ],
+    "duration": 123,
+    "energy": 0.55,
+    "is_major": 1,
+    "key": null,
+    "release_date": "Sat, 01 Jan 2000 00:00:00 GMT",
+    "song_name": "abc",
+    "song_spotify_id": "nfdgfsdfgngfsdgftwgtfdgfvndfgfgsasdfgdseeg"
+  }
+]
