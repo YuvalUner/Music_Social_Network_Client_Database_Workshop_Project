@@ -58,7 +58,7 @@ class Recommendations extends React.Component<any, any>{
                                             >
                                                 <ListItemText
                                                     primary={song.song_name}
-                                                    secondary={song.artists}/>
+                                                    secondary={song.artists.join(", ")}/>
                                             </ListItemButton>
                                         );
                                     })}

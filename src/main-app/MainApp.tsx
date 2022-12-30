@@ -11,8 +11,12 @@ import AlbumPage from "./album-page/AlbumPage";
 import ArtistRecommendationPage from "./artist-recommendation-page/ArtistRecommendationPage";
 import AlbumRecommendationsPage from "./album-recommendations-page/AlbumRecommendationsPage";
 import AddAlbumPage from "./add-album-page/AddAlbumPage";
+import {Box, CssBaseline, Divider, Stack} from "@mui/material";
+import SearchTab from "./search/SearchTab";
+import SearchResultsPage from "./search/SearchResultsPage";
+import TopSongPage from "./top-songs-page/TopSongPage";
 
-class MainApp extends React.Component<any, any>{
+class MainApp extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -21,8 +25,13 @@ class MainApp extends React.Component<any, any>{
             artist_name: "",
             song_name: "",
             album_name: "",
+            searchQuery: "",
+            searchType: "",
         }
     }
+
+    discoverTabWidth = 20;
+    sideTabWidth = 20;
 
     setArtistName = (artist_name: string | [string]): void => {
         this.setState({artist_name: artist_name});
@@ -36,13 +45,25 @@ class MainApp extends React.Component<any, any>{
         this.setState({album_name: album_name});
     }
 
+    setSearchType = (e: any): void => {
+        this.setState({searchType: e.target.value});
+    }
+
+    setSearchQuery = (e: any): void => {
+        this.setState({searchQuery: e.target.value});
+    }
+
     setPage = (page: PageEnum): void => {
         this.setState({page: page});
     }
 
     render() {
         return (
-            <div className={"h-100"}>
+            <Box sx={{
+                    display: "flex"
+                }}
+            >
+                <CssBaseline />
                 <DiscoverTab
                     username={this.props.username}
                     setArtistName={this.setArtistName}
@@ -50,28 +71,56 @@ class MainApp extends React.Component<any, any>{
                     setPage={this.setPage}
                     setAlbumName={this.setAlbumName}
                     setArtists={this.setArtistName}
+                    width={this.discoverTabWidth}
                 />
-                <div className={"d-flex align-items-center justify-content-center"}>
-                    {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
-                    {this.state.page === PageEnum.ALBUM && <AlbumPage album_name={this.state.album_name}></AlbumPage>}
-                    {this.state.page === PageEnum.ARTIST && <ArtistPage></ArtistPage>}
-                    {this.state.page === PageEnum.SONG && <SongPage
-                        albumName={this.state.album_name}
-                        songName={this.state.song_name}
-                        artists={this.state.artist_name}
-                        username={this.props.username}>
-                    </SongPage>}
-                    {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
-                    {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage/>}
-                    {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
-                    {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
-                    {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
-                </div>
+                <Box
+                    component="main"
+                    sx={{ flexGrow: 1, p: 3, marginLeft: `${this.discoverTabWidth}%`, marginRight: `${this.sideTabWidth}%` }}
+                >
+                    <Stack sx={{
+                    }}
+                           divider={<Divider orientation="vertical" flexItem/>}
+                           spacing={2}
+                    >
+                        <SearchTab
+                            searchQuery={this.state.searchQuery}
+                            setSearchQuery={this.setSearchQuery}
+                            searchType={this.state.searchType}
+                            setSearchType={this.setSearchType}
+                            setPage={this.setPage}
+                        />
+                        {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
+                        {this.state.page === PageEnum.ALBUM &&
+                            <AlbumPage album_name={this.state.album_name}></AlbumPage>}
+                        {this.state.page === PageEnum.ARTIST && <ArtistPage></ArtistPage>}
+                        {this.state.page === PageEnum.SONG && <SongPage
+                            albumName={this.state.album_name}
+                            songName={this.state.song_name}
+                            artists={this.state.artist_name}
+                            username={this.props.username}>
+                        </SongPage>}
+                        {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
+                        {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage/>}
+                        {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
+                        {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
+                        {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
+                        {this.state.page === PageEnum.SEARCH_RESULTS && <SearchResultsPage
+                            searchQuery={this.state.searchQuery}
+                            searchType={this.state.searchType}
+                            setPage={this.setPage}
+                            setArtistName={this.setArtistName}
+                            setSongName={this.setSongName}
+                            setAlbumName={this.setAlbumName}
+                        />}
+                        {this.state.page === PageEnum.TOP_SONGS && <TopSongPage/>}
+                    </Stack>
+                </Box>
                 <MenuSideBar
                     username={this.props.username}
                     setPage={this.setPage}
+                    width={this.sideTabWidth}
                 />
-            </div>
+            </Box>
         );
     }
 }

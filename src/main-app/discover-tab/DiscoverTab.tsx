@@ -12,7 +12,7 @@ class DiscoverTab extends React.Component<any, any>{
             anchor={"left"}
             sx={{
                 display: { xs: 'none', sm: 'block' },
-                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
+                '& .MuiDrawer-paper': { boxSizing: 'border-box', width: `${this.props.width}%` },
             }}
             >
                 <h2>Discover</h2>
