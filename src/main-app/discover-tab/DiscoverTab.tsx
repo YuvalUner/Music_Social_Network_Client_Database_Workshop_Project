@@ -20,6 +20,7 @@ class DiscoverTab extends React.Component<any, any>{
                 <Divider />
                 <h5>Recommendations</h5>
                 <Recommendations
+                    username={this.props.username}
                     setSongName={this.props.setSongName}
                     setAlbumName={this.props.setAlbumName}
                     setArtistName={this.props.setArtistName}

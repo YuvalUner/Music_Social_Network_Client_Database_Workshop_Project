@@ -1,5 +1,6 @@
 import React from "react";
 import songExample from "./song_example.json";
+import ratingExample from "./rating_example.json";
 import CommentsSection from "./components/comments-section";
 import {Box, Divider, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
 import SongPrimaryCard from "./components/song-primary-card";
@@ -14,6 +15,7 @@ class SongPage extends React.Component<any, any> {
             commentsLoading: true,
             song: {},
             songLoading: true,
+            rating: NaN,
         };
     }
 
@@ -34,8 +36,23 @@ class SongPage extends React.Component<any, any> {
         this.setState({songLoading: false, song: songExample});
     }
 
+    // getRating = async (): Promise<void> => {
+    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.ratingsApiUrl}/song_rating/${this.props.songName}/${this.props.albumName}`, {
+    //         method: "GET",
+    //     });
+    //     if (response.status === 200) {
+    //         let rating: any = await response.json();
+    //         this.setState({rating: rating.rating});
+    //     }
+    // }
+
+    getRating = async (): Promise<void> => {
+        this.setState({rating: ratingExample.rating});
+    }
+
     async componentDidMount() {
         await this.getSong();
+        await this.getRating();
     }
 
     createSongInfoTable = (): JSX.Element => {
@@ -54,6 +71,10 @@ class SongPage extends React.Component<any, any> {
                     <TableRow>
                         <TableCell>Album</TableCell>
                         <TableCell>{this.props.albumName}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Rating</TableCell>
+                        <TableCell>{this.state.rating.toFixed(2)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Release date</TableCell>

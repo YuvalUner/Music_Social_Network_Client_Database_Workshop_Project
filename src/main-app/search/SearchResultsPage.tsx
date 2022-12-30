@@ -3,8 +3,7 @@ import SearchTypes from "./search-type-enum";
 import configData from "../../config.json";
 import searchResults from "./approx_search_results_example.json";
 import {Box, CircularProgress, List, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
-import {Md5} from "ts-md5";
-import PageEnum from "../page-enum";
+import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
 
 class SearchResultsPage extends React.Component<any, any> {
 
@@ -38,42 +37,6 @@ class SearchResultsPage extends React.Component<any, any> {
         await this.getSearchResults();
     }
 
-    goToSongPage = (song_name: string, album_name: string, artists: string | [string]): void => {
-        this.props.setSongName(song_name);
-        this.props.setAlbumName(album_name);
-        this.props.setArtistName(artists);
-        this.props.setPage(PageEnum.SONG);
-    }
-
-    createSearchResultsList = (): JSX.Element => {
-        return (
-            <List>
-                {this.state.searchResults.map((song: any) => {
-                    return (
-                        <ListItemButton
-                            key={Md5.hashStr(`${song.song_name}${song.album_name}`)}
-                            onClick={() => this.goToSongPage(song.song_name, song.album_name, song.artists)}
-                        >
-                            <ListItemText
-                                primary={song.song_name}
-                                secondary={<Typography
-                                    sx={{ display: 'inline' }}
-                                    component="span"
-                                    variant="body2"
-                                    color="text.primary"
-                                >
-                                    Artist(s): {song.artists.join(", ")}
-                                    <br/> Album: {song.album_name}
-                                    <br/> Release data: {song.release_date}
-                                </Typography>}/>
-                        </ListItemButton>
-                    );
-                })
-                }
-            </List>
-        );
-    }
-
     render() {
         return (
             <Box>
@@ -86,8 +49,20 @@ class SearchResultsPage extends React.Component<any, any> {
                             <CircularProgress/>
                         </div>
                     </div>}
-                {!this.state.searchResultsLoading &&
-                    this.createSearchResultsList()
+                {!this.state.searchResultsLoading && this.state.searchResults.length > 0 &&
+                    <SongWithAlbumAndArtistsList
+                        searchResults={this.state.searchResults}
+                        setSongName={this.props.setSongName}
+                        setAlbumName={this.props.setAlbumName}
+                        setArtistName={this.props.setArtistName}
+                        setPage={this.props.setPage}
+
+                    />
+                }
+                {!this.state.searchResultsLoading && this.state.searchResults.length === 0 &&
+                    <div>
+                        No results found.
+                    </div>
                 }
             </Box>
         );

@@ -3,5 +3,6 @@
   "artistApiUrl": "/artists",
   "albumApiUrl": "/albums",
   "songsApiUrl": "/songs",
-  "commentsApiUrl": "/comments"
+  "commentsApiUrl": "/comments",
+  "favoriteSongsApiUrl": "/favorite-songs"
 }

@@ -101,7 +101,13 @@ class MainApp extends React.Component<any, any> {
                             username={this.props.username}>
                         </SongPage>}
                         {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
-                        {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage/>}
+                        {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage
+                            username={this.props.username}
+                            setSongName={this.setSongName}
+                            setAlbumName={this.setAlbumName}
+                            setArtistName={this.setArtistName}
+                            setPage={this.setPage}
+                        />}
                         {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
                         {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
                         {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
