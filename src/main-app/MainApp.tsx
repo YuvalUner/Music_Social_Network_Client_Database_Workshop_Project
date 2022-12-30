@@ -93,7 +93,9 @@ class MainApp extends React.Component<any, any> {
                         {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
                         {this.state.page === PageEnum.ALBUM &&
                             <AlbumPage album_name={this.state.album_name}></AlbumPage>}
-                        {this.state.page === PageEnum.ARTIST && <ArtistPage></ArtistPage>}
+                        {this.state.page === PageEnum.ARTIST && <ArtistPage
+                            artistName={this.state.artist_name}
+                        />}
                         {this.state.page === PageEnum.SONG && <SongPage
                             albumName={this.state.album_name}
                             songName={this.state.song_name}

@@ -3,7 +3,7 @@ import songExample from "./song_example.json";
 import ratingExample from "./rating_example.json";
 import CommentsSection from "./components/comments-section";
 import {Box, Divider, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
-import SongPrimaryCard from "./components/song-primary-card";
+import EntityPrimaryCard from "../general-components/entity-primary-card";
 import scaleNumToWordMapper from "./scale-num-to-word-mapper";
 
 class SongPage extends React.Component<any, any> {
@@ -58,8 +58,8 @@ class SongPage extends React.Component<any, any> {
     createSongInfoTable = (): JSX.Element => {
         return (
             <div>
-                <SongPrimaryCard
-                    songName={this.state.song.song_name}
+                <EntityPrimaryCard
+                    name={this.state.song.song_name}
                     albumName={this.props.albumName}
                     artists={this.props.artists}
                 />
