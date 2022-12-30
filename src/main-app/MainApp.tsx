@@ -12,7 +12,9 @@ import ArtistRecommendationPage from "./artist-recommendation-page/ArtistRecomme
 import AlbumRecommendationsPage from "./album-recommendations-page/AlbumRecommendationsPage";
 import AddAlbumPage from "./add-album-page/AddAlbumPage";
 import {Box, CssBaseline, Divider, Stack} from "@mui/material";
-import SearchTab from "./search-tab/SearchTab";
+import SearchTab from "./search/SearchTab";
+import SearchResultsPage from "./search/SearchResultsPage";
+import TopSongPage from "./top-songs-page/TopSongPage";
 
 class MainApp extends React.Component<any, any> {
 
@@ -23,6 +25,8 @@ class MainApp extends React.Component<any, any> {
             artist_name: "",
             song_name: "",
             album_name: "",
+            searchQuery: "",
+            searchType: "",
         }
     }
 
@@ -39,6 +43,14 @@ class MainApp extends React.Component<any, any> {
 
     setAlbumName = (album_name: string): void => {
         this.setState({album_name: album_name});
+    }
+
+    setSearchType = (e: any): void => {
+        this.setState({searchType: e.target.value});
+    }
+
+    setSearchQuery = (e: any): void => {
+        this.setState({searchQuery: e.target.value});
     }
 
     setPage = (page: PageEnum): void => {
@@ -70,7 +82,13 @@ class MainApp extends React.Component<any, any> {
                            divider={<Divider orientation="vertical" flexItem/>}
                            spacing={2}
                     >
-                        <SearchTab/>
+                        <SearchTab
+                            searchQuery={this.state.searchQuery}
+                            setSearchQuery={this.setSearchQuery}
+                            searchType={this.state.searchType}
+                            setSearchType={this.setSearchType}
+                            setPage={this.setPage}
+                        />
                         {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
                         {this.state.page === PageEnum.ALBUM &&
                             <AlbumPage album_name={this.state.album_name}></AlbumPage>}
@@ -86,6 +104,15 @@ class MainApp extends React.Component<any, any> {
                         {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
                         {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
                         {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
+                        {this.state.page === PageEnum.SEARCH_RESULTS && <SearchResultsPage
+                            searchQuery={this.state.searchQuery}
+                            searchType={this.state.searchType}
+                            setPage={this.setPage}
+                            setArtistName={this.setArtistName}
+                            setSongName={this.setSongName}
+                            setAlbumName={this.setAlbumName}
+                        />}
+                        {this.state.page === PageEnum.TOP_SONGS && <TopSongPage/>}
                     </Stack>
                 </Box>
                 <MenuSideBar

@@ -49,7 +49,7 @@ class SongPage extends React.Component<any, any> {
                 <Table>
                     <TableRow>
                         <TableCell>Artist(s)</TableCell>
-                        <TableCell>{this.props.artists}</TableCell>
+                        <TableCell>{this.props.artists.join(", ")}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Album</TableCell>
