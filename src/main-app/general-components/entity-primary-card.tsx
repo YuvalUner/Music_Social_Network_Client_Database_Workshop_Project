@@ -26,7 +26,7 @@ class EntityPrimaryCard extends React.Component<any, any> {
                 </h1>
                 <Avatar variant={"square"} sx={{
                     width: 200,
-                    height: 100
+                    height: 100,
                 }}/>
             </Stack>
         )

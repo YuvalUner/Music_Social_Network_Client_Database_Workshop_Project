@@ -95,12 +95,19 @@ class MainApp extends React.Component<any, any> {
                             <AlbumPage album_name={this.state.album_name}></AlbumPage>}
                         {this.state.page === PageEnum.ARTIST && <ArtistPage
                             artistName={this.state.artist_name}
+                            setPage={this.setPage}
+                            setAlbumName={this.setAlbumName}
                         />}
                         {this.state.page === PageEnum.SONG && <SongPage
                             albumName={this.state.album_name}
                             songName={this.state.song_name}
                             artists={this.state.artist_name}
-                            username={this.props.username}>
+                            username={this.props.username}
+                            setPage={this.setPage}
+                            setAlbumName={this.setAlbumName}
+                            setArtistName={this.setArtistName}
+                            key={this.state.song_name + this.state.album_name + this.state.artist_name}
+                        >
                         </SongPage>}
                         {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
                         {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage
