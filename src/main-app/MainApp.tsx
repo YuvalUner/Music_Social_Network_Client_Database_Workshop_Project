@@ -15,7 +15,7 @@ import {Box, CssBaseline, Divider, Stack} from "@mui/material";
 import SearchTypes from "./search/search-type-enum";
 import SearchTab from "./search/SearchTab";
 import SearchResultsPage from "./search/SearchResultsPage";
-import TopSongPage from "./top-songs-page/TopSongPage";
+import TopSongsPage from "./top-songs-page/TopSongsPage";
 
 class MainApp extends React.Component<any, any> {
 
@@ -136,7 +136,12 @@ class MainApp extends React.Component<any, any> {
                             setAlbumName={this.setAlbumName}
                             key={this.state.searchQuery + this.state.searchType}
                         />}
-                        {this.state.page === PageEnum.TOP_SONGS && <TopSongPage/>}
+                        {this.state.page === PageEnum.TOP_SONGS && <TopSongsPage
+                            setPage={this.setPage}
+                            setArtistName={this.setArtistName}
+                            setSongName={this.setSongName}
+                            setAlbumName={this.setAlbumName}
+                        />}
                     </Stack>
                 </Box>
                 <MenuSideBar
