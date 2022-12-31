@@ -4,5 +4,6 @@
   "albumApiUrl": "/albums",
   "songsApiUrl": "/songs",
   "commentsApiUrl": "/comments",
-  "favoriteSongsApiUrl": "/favorite-songs"
+  "favoriteSongsApiUrl": "/favorite-songs",
+  "genresApiUrl": "/genres"
 }

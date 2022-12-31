@@ -1,31 +1,31 @@
 function scaleNumToWordMapper(scaleNum: number): string {
     switch(scaleNum) {
-        case 0:
-            return 'C';
         case 1:
-            return 'C#';
+            return 'C';
         case 2:
-            return 'D';
+            return 'C#';
         case 3:
-            return 'D#';
+            return 'D';
         case 4:
-            return 'E';
+            return 'D#';
         case 5:
-            return 'F';
+            return 'E';
         case 6:
-            return 'F#';
+            return 'F';
         case 7:
-            return 'G';
+            return 'F#';
         case 8:
-            return 'G#';
+            return 'G';
         case 9:
-            return 'A';
+            return 'G#';
         case 10:
-            return 'A#';
+            return 'A';
         case 11:
+            return 'A#';
+        case 12:
             return 'B';
         default:
-            return 'C';
+            return 'Error';
     }
 }
 

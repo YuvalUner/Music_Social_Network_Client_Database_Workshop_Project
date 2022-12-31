@@ -9,6 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import configData from "../../config.json";
 import PageEnum from "../page-enum";
 import ArtistsListWithLinks from "../general-components/artists-list-with-links";
+import {millisToMinutesAndSeconds} from "../general-components/time-converter";
 
 class SongPage extends React.Component<any, any> {
 
@@ -90,6 +91,10 @@ class SongPage extends React.Component<any, any> {
                     <TableRow>
                         <TableCell>Release date</TableCell>
                         <TableCell>{this.state.song.release_date}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Duration</TableCell>
+                        <TableCell>{millisToMinutesAndSeconds(this.state.song.duration)}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Energy</TableCell>
