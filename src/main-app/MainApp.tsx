@@ -16,6 +16,7 @@ import SearchTypes from "./search/search-type-enum";
 import SearchTab from "./search/SearchTab";
 import SearchResultsPage from "./search/SearchResultsPage";
 import TopSongsPage from "./top-songs-page/TopSongsPage";
+import configData  from "../config.json";
 
 class MainApp extends React.Component<any, any> {
 
@@ -28,6 +29,8 @@ class MainApp extends React.Component<any, any> {
             album_name: "",
             searchQuery: "",
             searchType: SearchTypes.EXACT,
+            homeSearchResults: [],
+            homeLoading: true
         }
     }
 
@@ -56,6 +59,19 @@ class MainApp extends React.Component<any, any> {
 
     setPage = (page: PageEnum): void => {
         this.setState({page: page});
+    }
+
+    getHomePageResults = async (): Promise<void> => {
+        this.setState({homeLoading: true});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/random/100`, {
+            method: 'GET'
+        });
+        let data: any = await response.json();
+        this.setState({homeSearchResults: data, homeLoading: false});
+    }
+
+    async componentDidMount() {
+        await this.getHomePageResults();
     }
 
     render() {
@@ -90,7 +106,15 @@ class MainApp extends React.Component<any, any> {
                             setSearchType={this.setSearchType}
                             setPage={this.setPage}
                         />
-                        {this.state.page === PageEnum.HOME && <HomePage></HomePage>}
+                        {this.state.page === PageEnum.HOME && <HomePage
+                            refreshHomePage={this.getHomePageResults}
+                            homeSearchResults={this.state.homeSearchResults}
+                            homeLoading={this.state.homeLoading}
+                            setPage={this.setPage}
+                            setArtistName={this.setArtistName}
+                            setSongName={this.setSongName}
+                            setAlbumName={this.setAlbumName}
+                        />}
                         {this.state.page === PageEnum.ALBUM &&
                             <AlbumPage
                                 albumName={this.state.album_name}

@@ -17,6 +17,7 @@ import AlbumIcon from '@mui/icons-material/Album';
 import PageEnum from "../page-enum";
 import RecommendIcon from '@mui/icons-material/Recommend';
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import HomeIcon from '@mui/icons-material/Home';
 
 class MenuSideBar extends React.Component<any, any>{
 
@@ -34,6 +35,15 @@ class MenuSideBar extends React.Component<any, any>{
                 </ListItem>
                 <Toolbar/>
                 <Divider/>
+                <ListItemButton
+                    key={"sidebar-menu-home"}
+                    onClick={() => this.props.setPage(PageEnum.HOME)}
+                >
+                    <ListItemIcon>
+                        <HomeIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary={"Home"}/>
+                </ListItemButton>
                 <ListItemButton
                     key={"sidebar-menu-favorites-songs"}
                     onClick={() => this.props.setPage(PageEnum.FAVORITE_SONGS)}

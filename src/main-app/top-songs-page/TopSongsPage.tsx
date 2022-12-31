@@ -56,10 +56,10 @@ class TopSongsPage extends React.Component<any, any> {
     getSongs = async (e): Promise<void> => {
         e.preventDefault();
         if (this.state.selected_year === "All Times"){
-            this.setState({songs_loading: true, songs: topAllTime});
+            this.setState({songs_loading: false, songs: topAllTime});
         }
         else{
-            this.setState({songs_loading: true, songs: top2020});
+            this.setState({songs_loading: false, songs: top2020});
         }
     }
 
