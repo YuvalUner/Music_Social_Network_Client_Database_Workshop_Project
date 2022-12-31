@@ -1,5 +1,5 @@
 import React from 'react';
-import {CircularProgress, IconButton, Stack} from "@mui/material";
+import {Box, CircularProgress, IconButton, Stack} from "@mui/material";
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
@@ -7,7 +7,7 @@ class HomePage extends React.Component<any, any> {
 
     render() {
         return (
-            <Stack alignItems={"start"} spacing={2}>
+            <Stack spacing={2}>
                 <Stack direction={"row"}>
                     <h1>
                         Home Page
@@ -17,9 +17,13 @@ class HomePage extends React.Component<any, any> {
                         <RefreshIcon/>
                     </IconButton>
                 </Stack>
+                <Box sx={{
+                    alignSelf: "start"
+                }}>
                 <h3>
                     Here are some random songs you may like
                 </h3>
+                </Box>
                 {this.props.homeLoading ?
                     <div>
                         <div className={"mb-3"}>
