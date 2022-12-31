@@ -10,6 +10,13 @@ class ArtistsListWithLinks extends React.Component<any, any>{
     }
 
     createArtistLinks = (): JSX.Element => {
+        if (typeof this.props.artists === "string") {
+            return (
+              <Link href={"#"} onClick={() => this.goToArtistPage(this.props.artists)}>
+                    {this.props.artists}
+                </Link>
+            );
+        }
         let artists: string[] = this.props.artists;
         let artistLinks: JSX.Element[] = [];
         for (let i = 0; i < artists.length; i++) {
