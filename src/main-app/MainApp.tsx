@@ -140,7 +140,9 @@ class MainApp extends React.Component<any, any> {
                             key={this.state.song_name + this.state.album_name + this.state.artist_name}
                         >
                         </SongPage>}
-                        {this.state.page === PageEnum.ADD_SONG && <AddSongPage/>}
+                        {this.state.page === PageEnum.ADD_SONG && <AddSongPage
+                            username={this.props.username}
+                        />}
                         {this.state.page === PageEnum.FAVORITE_SONGS && <FavoriteSongsPage
                             username={this.props.username}
                             setSongName={this.setSongName}
@@ -150,7 +152,9 @@ class MainApp extends React.Component<any, any> {
                         />}
                         {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
                         {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
-                        {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage/>}
+                        {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage
+                            username={this.props.username}
+                        />}
                         {this.state.page === PageEnum.SEARCH_RESULTS && <SearchResultsPage
                             searchQuery={this.state.searchQuery}
                             searchType={this.state.searchType}
