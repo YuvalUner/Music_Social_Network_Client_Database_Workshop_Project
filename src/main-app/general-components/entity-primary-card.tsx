@@ -2,7 +2,7 @@ import React from "react";
 import {Avatar, Stack} from "@mui/material";
 
 
-class SongPrimaryCard extends React.Component<any, any> {
+class EntityPrimaryCard extends React.Component<any, any> {
 
     render() {
         return (
@@ -14,19 +14,23 @@ class SongPrimaryCard extends React.Component<any, any> {
                     border: 1,
                     borderColor: 'grey.500',
                     borderRadius: 1,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                 }}
                 alignItems={"center"}
             >
                 <h1>
-                    {this.props.songName}
+                    {this.props.name}
                 </h1>
                 <Avatar variant={"square"} sx={{
                     width: 200,
-                    height: 100
+                    height: 100,
                 }}/>
             </Stack>
         )
     }
 }
 
-export default SongPrimaryCard;
+export default EntityPrimaryCard;
