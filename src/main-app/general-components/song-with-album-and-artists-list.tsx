@@ -31,7 +31,8 @@ class SongWithAlbumAndArtistsList extends React.Component<any, any>{
                                 >
                                     Artist(s): {song.artists.join(", ")}
                                     <br/> Album: {song.album_name}
-                                    <br/> Release data: {song.release_date}
+                                    <br/> Release date: {song.release_date}
+                                    {this.props.showRating && <><br/> Rating: {parseFloat(song.rating).toFixed(2)}</>}
                                 </Typography>}/>
                         </ListItemButton>
                     );
