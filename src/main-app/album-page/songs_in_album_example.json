@@ -1,0 +1,42 @@
+[
+  {
+    "album_id": 18902,
+    "duration": 247533,
+    "energy": 0.818,
+    "is_major": 1,
+    "release_date": "Tue, 23 Apr 2019 00:00:00 GMT",
+    "song_key": 1,
+    "song_name": "Name",
+    "song_spotify_id": "6oE1c01yZ35pIEikvqilAQ"
+  },
+  {
+    "album_id": 18902,
+    "duration": 198573,
+    "energy": 0.915,
+    "is_major": 1,
+    "release_date": "Tue, 23 Apr 2019 00:00:00 GMT",
+    "song_key": 2,
+    "song_name": "Purpose For Pain",
+    "song_spotify_id": "3LM5gBcxDQXiIbn0LTCPI9"
+  },
+  {
+    "album_id": 18902,
+    "duration": 246720,
+    "energy": 0.865,
+    "is_major": 1,
+    "release_date": "Fri, 16 Aug 2019 00:00:00 GMT",
+    "song_key": 1,
+    "song_name": "Name (Single Mix)",
+    "song_spotify_id": "6rGL1P3oNvxSaEQUQUvLWz"
+  },
+  {
+    "album_id": 18902,
+    "duration": 123,
+    "energy": 0.55,
+    "is_major": 1,
+    "release_date": "Sat, 01 Jan 2000 00:00:00 GMT",
+    "song_key": null,
+    "song_name": "abc",
+    "song_spotify_id": "galghsjaeajfagio"
+  }
+]

@@ -1,5 +1,6 @@
 import React from "react";
-import {Avatar, Stack} from "@mui/material";
+import {Avatar, Box, Stack, TextareaAutosize, Typography} from "@mui/material";
+import fitty from "fitty";
 
 
 class EntityPrimaryCard extends React.Component<any, any> {
@@ -18,12 +19,11 @@ class EntityPrimaryCard extends React.Component<any, any> {
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "space-between",
+                    fontSize: 20
                 }}
                 alignItems={"center"}
             >
-                <h1>
-                    {this.props.name}
-                </h1>
+                {this.props.name}
                 <Avatar variant={"square"} sx={{
                     width: 200,
                     height: 100,

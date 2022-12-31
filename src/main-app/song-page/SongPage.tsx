@@ -8,6 +8,7 @@ import scaleNumToWordMapper from "./scale-num-to-word-mapper";
 import StarIcon from '@mui/icons-material/Star';
 import configData from "../../config.json";
 import PageEnum from "../page-enum";
+import ArtistsListWithLinks from "../general-components/artists-list-with-links";
 
 class SongPage extends React.Component<any, any> {
 
@@ -60,27 +61,11 @@ class SongPage extends React.Component<any, any> {
         await this.getRating();
     }
 
-    goToArtistPage = (artistName: string): void => {
-        this.props.setArtistName(artistName);
-        this.props.setPage(PageEnum.ARTIST)
+    goToAlbumPage = (): void => {
+        this.props.setAlbumName(this.props.albumName);
+        this.props.setPage(PageEnum.ALBUM);
     }
 
-    createArtistLinks = (): JSX.Element => {
-        let artists: string[] = this.props.artists;
-        let artistLinks: JSX.Element[] = [];
-        for (let i = 0; i < artists.length; i++) {
-            artistLinks.push(<Link
-                href={"#"}
-                onClick={() => this.goToArtistPage(artists[i])}
-                key={artists[i]}>
-                {artists[i]}
-            </Link>);
-            if (i !== artists.length - 1) {
-                artistLinks.push(<span key={artists[i] + "span"}>, </span>);
-            }
-        }
-        return <>{artistLinks}</>;
-    }
 
     createSongInfoTable = (): JSX.Element => {
         return (
@@ -88,11 +73,15 @@ class SongPage extends React.Component<any, any> {
                 <Table>
                     <TableRow>
                         <TableCell>Artist(s)</TableCell>
-                        <TableCell>{this.createArtistLinks()}</TableCell>
+                        <TableCell><ArtistsListWithLinks
+                            artists={this.props.artists}
+                            setPage={this.props.setPage}
+                            setArtistName={this.props.setArtistName}
+                        /></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Album</TableCell>
-                        <TableCell>{this.props.albumName}</TableCell>
+                        <TableCell><Link href={"#"} onClick={this.goToAlbumPage}>{this.props.albumName}</Link></TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Rating</TableCell>
