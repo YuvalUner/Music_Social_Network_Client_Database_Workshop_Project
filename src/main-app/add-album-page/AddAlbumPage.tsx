@@ -30,39 +30,39 @@ class AddAlbumPage extends React.Component<any, any> {
         }
     }
 
-    // /**
-    //  * Sends a request to the server to add an album to the database.
-    //  * Sets the state of the component to show a success or error message.
-    //  * @param e
-    //  */
-    // addAlbum = async (e: any): Promise<void> => {
-    //     e.preventDefault();
-    //     if (this.checkValidity()) {
-    //         const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 name: this.state.albumName,
-    //                 artist: this.props.username
-    //             })
-    //         });
-    //         if (response.status === 201) {
-    //             this.setState({addAlbumSuccess: true});
-    //         }
-    //         else {
-    //             this.setState({addAlbumError: true, addAlbumSuccess: false});
-    //         }
-    //     }
-    // }
-
+    /**
+     * Sends a request to the server to add an album to the database.
+     * Sets the state of the component to show a success or error message.
+     * @param e
+     */
     addAlbum = async (e: any): Promise<void> => {
         e.preventDefault();
-        if (this.checkValidity()){
-            this.setState({addAlbumSuccess: true});
+        if (this.checkValidity()) {
+            const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: this.state.albumName,
+                    artist: this.props.username
+                })
+            });
+            if (response.status === 201) {
+                this.setState({addAlbumSuccess: true});
+            }
+            else {
+                this.setState({addAlbumError: true, addAlbumSuccess: false});
+            }
         }
     }
+
+    // addAlbum = async (e: any): Promise<void> => {
+    //     e.preventDefault();
+    //     if (this.checkValidity()){
+    //         this.setState({addAlbumSuccess: true});
+    //     }
+    // }
 
     render() {
         return (

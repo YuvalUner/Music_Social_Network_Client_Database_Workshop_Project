@@ -24,44 +24,44 @@ class ArtistPage extends React.Component<any, any> {
         }
     }
 
-    // /**
-    //  * Makes a request to the backend to get the artist's albums.
-    //  */
-    // getArtistAlbums = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.artist_name}`);
-    //     const data: any = await response.json();
-    //     this.setState({artistAlbums: data});
-    // }
-    //
-    // /**
-    //  * Makes a request to the backend to get the artist's rating.
-    //  */
-    // getArtistRating = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/rating/${this.props.artist_name}`);
-    //     const data: any = await response.json();
-    //     this.setState({artistRating: parseFloat(data.rating).toFixed(2)});
-    // }
-    //
-    // /**
-    //  * Makes a request to the backend to get the artist's Spotify ID.
-    //  */
-    // getArtistSpotifyId = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/spotify_id/${this.props.artist_name}`);
-    //     const data: any = await response.json();
-    //     this.setState({artistSpotifyId: data.spotify_id});
-    // }
-
+    /**
+     * Makes a request to the backend to get the artist's albums.
+     */
     getArtistAlbums = async (): Promise<void> => {
-        this.setState({artistAlbums: artistAlbums});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.artistName}`);
+        const data: any = await response.json();
+        this.setState({artistAlbums: data});
     }
 
+    /**
+     * Makes a request to the backend to get the artist's rating.
+     */
     getArtistRating = async (): Promise<void> => {
-        this.setState({artistRating: parseFloat(artistRating.rating).toFixed(2)});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/rating/${this.props.artistName}`);
+        const data: any = await response.json();
+        this.setState({artistRating: parseFloat(data.rating).toFixed(2)});
     }
 
+    /**
+     * Makes a request to the backend to get the artist's Spotify ID.
+     */
     getArtistSpotifyId = async (): Promise<void> => {
-        this.setState({artistSpotifyId: artistSpotifyId.spotify_id});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/spotify_id/${this.props.artistName}`);
+        const data: any = await response.json();
+        this.setState({artistSpotifyId: data.spotify_id.replace("'", "").replace("'", "")});
     }
+
+    // getArtistAlbums = async (): Promise<void> => {
+    //     this.setState({artistAlbums: artistAlbums});
+    // }
+    //
+    // getArtistRating = async (): Promise<void> => {
+    //     this.setState({artistRating: parseFloat(artistRating.rating).toFixed(2)});
+    // }
+    //
+    // getArtistSpotifyId = async (): Promise<void> => {
+    //     this.setState({artistSpotifyId: artistSpotifyId.spotify_id});
+    // }
 
     async componentDidMount(): Promise<void> {
         await this.getArtistAlbums();

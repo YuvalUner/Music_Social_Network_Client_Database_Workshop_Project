@@ -30,45 +30,48 @@ class SongPage extends React.Component<any, any> {
         };
     }
 
-    // /**
-    //  * getSong gets the song's information from the API.
-    //  * If successful, it sets the song's information to the state.
-    //  * Regardless of success, it sets the songLoading state to false, so that the page can be rendered.
-    //  */
-    // getSong = async (): Promise<void> => {
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_by_name_and_album/${this.props.song_name}/${this.props.album_name}`, {
-    //         method: "GET",
-    //     });
-    //     if (response.status === 200) {
-    //         let song: any = await response.json();
-    //         this.setState({song: song, songLoading: false});
-    //     }
-    //     else{
-    //         this.setState({songLoading: false});
-    //     }
-    // }
-
+    /**
+     * getSong gets the song's information from the API.
+     * If successful, it sets the song's information to the state.
+     * Regardless of success, it sets the songLoading state to false, so that the page can be rendered.
+     */
     getSong = async (): Promise<void> => {
-        this.setState({songLoading: false, song: songExample});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_by_name_and_album/${this.props.songName}/${this.props.albumName}`, {
+            method: "GET",
+        });
+        if (response.status === 200) {
+            let song: any = await response.json();
+            this.setState({song: song, songLoading: false});
+        }
+        else{
+            this.setState({songLoading: false});
+        }
     }
 
-    // /***
-    //  * getRating gets the song's rating from the API.
-    //  * If successful, it sets the song's rating to the state.
-    //  */
-    // getRating = async (): Promise<void> => {
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.ratingsApiUrl}/song_rating/${this.props.songName}/${this.props.albumName}`, {
-    //         method: "GET",
-    //     });
-    //     if (response.status === 200) {
-    //         let rating: any = await response.json();
-    //         this.setState({rating: rating.rating});
-    //     }
+    // getSong = async (): Promise<void> => {
+    //     this.setState({songLoading: false, song: songExample});
     // }
 
+    /***
+     * Gets the song's rating from the API.
+     * If successful, it sets the song's rating to the state.
+     */
     getRating = async (): Promise<void> => {
-        this.setState({rating: ratingExample.rating});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/song_rating/${this.props.songName}/${this.props.albumName}`, {
+            method: "GET",
+        });
+        if (response.status === 200) {
+            let rating: any = await response.json();
+            this.setState({rating: parseFloat(rating.rating)});
+        }
+        else{
+            this.setState({rating: NaN});
+        }
     }
+
+    // getRating = async (): Promise<void> => {
+    //     this.setState({rating: ratingExample.rating});
+    // }
 
     async componentDidMount() {
         await this.getSong();
@@ -108,7 +111,7 @@ class SongPage extends React.Component<any, any> {
                     </TableRow>
                     <TableRow>
                         <TableCell>Rating</TableCell>
-                        <TableCell>{this.state.rating.toFixed(2)}</TableCell>
+                        <TableCell>{!isNaN(this.state.rating) ? this.state.rating.toFixed(2) : "No rating"}</TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell>Release date</TableCell>
@@ -125,7 +128,7 @@ class SongPage extends React.Component<any, any> {
                     <TableRow>
                         <TableCell>Key</TableCell>
                         <TableCell>
-                            {`${scaleNumToWordMapper(this.state.song.key)} ${this.state.song.is_major === 0 ? "minor" : "major"}`}
+                            {`${scaleNumToWordMapper(parseInt(this.state.song.song_key))} ${this.state.song.is_major === 0 ? "minor" : "major"}`}
                         </TableCell>
                     </TableRow>
                     <TableRow>
@@ -142,33 +145,33 @@ class SongPage extends React.Component<any, any> {
         );
     }
 
-    // /**
-    //  * Adds the song to the user's favorite songs list in the API.
-    //  * If successful, it sets the addToFavoriteSuccess state to true, so that the success message will be displayed.
-    //  * If unsuccessful, it sets the addToFavoriteError state to true, so that the error message will be displayed.
-    //  */
-    // addToFavorites = async (): Promise<void> => {
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.favoriteSongsApiUrl}/`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify({
-    //             song_name: this.state.song.song_name,
-    //             album_name: this.props.albumName,
-    //             artist_name: this.props.username,
-    //         })});
-    //     if (response.status === 201) {
-    //         this.setState({addToFavoritesSuccess: true, addToFavoritesError: false});
-    //     }
-    //     else{
-    //         this.setState({addToFavoritesSuccess: false, addToFavoritesError: true});
-    //     }
-    // }
-
+    /**
+     * Adds the song to the user's favorite songs list in the API.
+     * If successful, it sets the addToFavoriteSuccess state to true, so that the success message will be displayed.
+     * If unsuccessful, it sets the addToFavoriteError state to true, so that the error message will be displayed.
+     */
     addToFavorites = async (): Promise<void> => {
-        this.setState({addToFavoritesSuccess: true, addToFavoritesError: false});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.favoriteSongsApiUrl}/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                song_name: this.state.song.song_name,
+                album_name: this.props.albumName,
+                artist_name: this.props.username,
+            })});
+        if (response.status === 201) {
+            this.setState({addToFavoritesSuccess: true, addToFavoritesError: false});
+        }
+        else{
+            this.setState({addToFavoritesSuccess: false, addToFavoritesError: true});
+        }
     }
+
+    // addToFavorites = async (): Promise<void> => {
+    //     this.setState({addToFavoritesSuccess: true, addToFavoritesError: false});
+    // }
 
 
     render() {
@@ -211,7 +214,9 @@ class SongPage extends React.Component<any, any> {
                         songName={this.props.songName}
                         albumName={this.props.albumName}
                         username={this.props.username}
-                        key={this.props.songName + this.props.albumName}/>
+                        key={this.props.songName + this.props.albumName}
+                        refreshRating={this.getRating}
+                    />
             </Stack>
         );
     }

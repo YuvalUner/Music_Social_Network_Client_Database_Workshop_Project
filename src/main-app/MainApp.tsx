@@ -160,11 +160,13 @@ class MainApp extends React.Component<any, any> {
                                 artists={this.state.artist_name}
                                 setAlbumName={this.setAlbumName}
                                 setSongName={this.setSongName}
+                                key={this.state.album_name}
                             />}
                         {this.state.page === PageEnum.ARTIST && <ArtistPage
                             artistName={this.state.artist_name}
                             setPage={this.setPage}
                             setAlbumName={this.setAlbumName}
+                            key={this.state.artist_name}
                         />}
                         {this.state.page === PageEnum.SONG && <SongPage
                             albumName={this.state.album_name}

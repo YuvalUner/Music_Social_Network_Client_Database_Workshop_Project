@@ -23,6 +23,8 @@ class DiscoverTab extends React.Component<any, any>{
                 <Toolbar />
                 <Divider />
                 <h5>Recommendations</h5>
+                <p className={"small-text"}>Please note that information in this tab may not be complete - songs with multiple artists
+                    collaborating will only display a single artist in this list</p>
                 <Recommendations
                     username={this.props.username}
                     setSongName={this.props.setSongName}

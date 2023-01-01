@@ -19,26 +19,26 @@ class Recommendations extends React.Component<any, any>{
         };
     }
 
-    // /**
-    //  * Makes a request to the backend to get the recommendations.
-    //  */
-    // getRecommendations = async (): Promise<void> => {
-    //     this.setState({recommendationsLoading: true});
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_reccomendations/${this.props.username}/10`, {
-    //         method: "GET",
-    //     });
-    //     if (response.status === 200) {
-    //         let recommendations: any = await response.json();
-    //         this.setState({recommendations: recommendations, recommendationsLoading: false});
-    //     }
-    //     else{
-    //         this.setState({recommendationsLoading: false});
-    //     }
-    // }
-
+    /**
+     * Makes a request to the backend to get the recommendations.
+     */
     getRecommendations = async (): Promise<void> => {
-        this.setState({recommendationsLoading: false, recommendations: recommendations});
+        this.setState({recommendationsLoading: true});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_reccomendations/${this.props.username}/10`, {
+            method: "GET",
+        });
+        if (response.status === 200) {
+            let recommendations: any = await response.json();
+            this.setState({recommendations: recommendations, recommendationsLoading: false});
+        }
+        else{
+            this.setState({recommendationsLoading: false});
+        }
     }
+
+    // getRecommendations = async (): Promise<void> => {
+    //     this.setState({recommendationsLoading: false, recommendations: recommendations});
+    // }
 
     /**
      * Goes to the song page of the song that was clicked.

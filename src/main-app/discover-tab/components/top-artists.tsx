@@ -3,6 +3,7 @@ import artists from "../artists_example.json";
 import PageEnum from "../../page-enum";
 import {CircularProgress, List, ListItemButton, ListItemText} from "@mui/material";
 import {Md5} from "ts-md5";
+import configData from "../../../config.json";
 
 /**
  * The top artists part of the discover tab.
@@ -13,26 +14,26 @@ class TopArtists extends React.Component<any, any> {
         super(props);
         this.state = {
             topArtists: [],
-            TopArtistsLoading: true
+            topArtistsLoading: true
         };
     }
 
 
-    // /**
-    //  * Makes a request to the backend to get the top artists.
-    //  * If fails, assume the server has gone up in flames and everyone is dead.
-    //  */
-    // getTopArtists = async (): Promise<void> => {
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/top_rated/10`, {
-    //         method: "GET"
-    //     });
-    //     let data = await response.json();
-    //     this.setState({topArtists: data, topArtistsLoading: false});
-    // }
-
+    /**
+     * Makes a request to the backend to get the top artists.
+     * If fails, assume the server has gone up in flames and everyone is dead.
+     */
     getTopArtists = async (): Promise<void> => {
-        this.setState({topArtistsLoading: false, topArtists: artists});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/top_rated/10`, {
+            method: "GET"
+        });
+        let data = await response.json();
+        this.setState({topArtists: data, topArtistsLoading: false});
     }
+
+    // getTopArtists = async (): Promise<void> => {
+    //     this.setState({topArtistsLoading: false, topArtists: artists});
+    // }
 
     /**
      * Goes to the artist page of the artist that was clicked.

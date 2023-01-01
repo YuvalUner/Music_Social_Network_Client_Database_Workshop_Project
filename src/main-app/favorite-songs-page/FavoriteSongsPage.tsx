@@ -17,24 +17,24 @@ class FavoriteSongsPage extends React.Component<any, any> {
         };
     }
 
-    // /**
-    //  * Makes a request to the backend to get the user's favorite songs.
-    //  */
-    // getFavoriteSongs = async (): Promise<void> => {
-    //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.favoriteSongsApiUrl}/${this.props.username}`, {
-    //         method: "GET",
-    //     })
-    //     if (response.status === 200) {
-    //         let favoriteSongs: any = await response.json();
-    //         this.setState({favoriteSongs: favoriteSongs, favoriteSongLoading: false});
-    //     } else {
-    //         this.setState({favoriteSongLoading: false});
-    //     }
-    // }
-
+    /**
+     * Makes a request to the backend to get the user's favorite songs.
+     */
     getFavoriteSongs = async (): Promise<void> => {
-      this.setState({favoriteSongs: favoriteSongs, favoriteSongLoading: false});
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.favoriteSongsApiUrl}/${this.props.username}`, {
+            method: "GET",
+        })
+        if (response.status === 200) {
+            let favoriteSongs: any = await response.json();
+            this.setState({favoriteSongs: favoriteSongs, favoriteSongLoading: false});
+        } else {
+            this.setState({favoriteSongLoading: false});
+        }
     }
+
+    // getFavoriteSongs = async (): Promise<void> => {
+    //   this.setState({favoriteSongs: favoriteSongs, favoriteSongLoading: false});
+    // }
 
     async componentDidMount() {
         await this.getFavoriteSongs();

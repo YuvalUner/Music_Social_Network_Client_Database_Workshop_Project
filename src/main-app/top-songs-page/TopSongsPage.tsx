@@ -17,62 +17,63 @@ class TopSongsPage extends React.Component<any, any> {
             songs: [],
             years_range: [],
             selected_year: "All Times",
+            no_load_yet: true,
             songs_loading: false,
             song_years_loading: true
         };
     }
 
-    // /**
-    //  * Gets the range of years that have songs in the database from the server.
-    //  */
-    // getYearRange = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_max_min_years`)
-    //     const data: any = await response.json();
-    //     let years = ["All Times"];
-    //     for (let i = data.max_year; i >= data.min_year; i--) {
-    //         years.push(i.toString());
-    //     }
-    //     this.setState({years_range: years, song_years_loading: false});
-    // }
-
+    /**
+     * Gets the range of years that have songs in the database from the server.
+     */
     getYearRange = async (): Promise<void> => {
-            const data = YearRange;
-            let years = ["All Times"];
-            for (let i = data.max_year; i >= data.min_year; i--) {
-                years.push(i.toString());
-            }
-            this.setState({years_range: years, song_years_loading: false});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_max_min_years`)
+        const data: any = await response.json();
+        let years = ["All Times"];
+        for (let i = data.max_year; i >= data.min_year; i--) {
+            years.push(i.toString());
+        }
+        this.setState({years_range: years, song_years_loading: false});
     }
+
+    // getYearRange = async (): Promise<void> => {
+    //         const data = YearRange;
+    //         let years = ["All Times"];
+    //         for (let i = data.max_year; i >= data.min_year; i--) {
+    //             years.push(i.toString());
+    //         }
+    //         this.setState({years_range: years, song_years_loading: false});
+    // }
 
     async componentDidMount() {
         await this.getYearRange();
     }
 
-    // /**
-    //  * Get tops songs from a certain year / all time from the server.
-    //  * @param e the event that triggered the function.
-    //  */
-    // getSongs = async (e): Promise<void> => {
-    //     e.preventDefault();
-    //     this.setState({songs_loading: true});
-    //     // Decide which year to get songs from and format it.
-    //     let methodPath = this.state.selected_year === "All Times" ? "/top_songs" : "/top_songs_per_year";
-    //     methodPath += "/100"
-    //     methodPath += this.state.selected_year === "All Times" ? "" : `/${this.state.selected_year}`;
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}${methodPath}`)
-    //     const data: any = await response.json();
-    //     this.setState({songs: data, songs_loading: false});
-    // }
-
+    /**
+     * Get tops songs from a certain year / all time from the server.
+     * @param e the event that triggered the function.
+     */
     getSongs = async (e): Promise<void> => {
         e.preventDefault();
-        if (this.state.selected_year === "All Times"){
-            this.setState({songs_loading: false, songs: topAllTime});
-        }
-        else{
-            this.setState({songs_loading: false, songs: top2020});
-        }
+        this.setState({songs_loading: true, no_load_yet: false});
+        // Decide which year to get songs from and format it.
+        let methodPath = this.state.selected_year === "All Times" ? "/top_songs" : "/top_songs_per_year";
+        methodPath += "/100"
+        methodPath += this.state.selected_year === "All Times" ? "" : `/${this.state.selected_year}`;
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}${methodPath}`)
+        const data: any = await response.json();
+        this.setState({songs: data, songs_loading: false});
     }
+
+    // getSongs = async (e): Promise<void> => {
+    //     e.preventDefault();
+    //     if (this.state.selected_year === "All Times"){
+    //         this.setState({songs_loading: false, songs: topAllTime});
+    //     }
+    //     else{
+    //         this.setState({songs_loading: false, songs: top2020});
+    //     }
+    // }
 
 
     render() {
@@ -130,7 +131,7 @@ class TopSongsPage extends React.Component<any, any> {
                         setPage={this.props.setPage}
                         showRating={true}
                     />
-                    : <div>No songs found</div>
+                    : !this.state.no_load_yet && <div>No songs found</div>
                 }
             </>
         );
