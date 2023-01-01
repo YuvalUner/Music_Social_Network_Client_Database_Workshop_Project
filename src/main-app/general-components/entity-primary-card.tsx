@@ -2,6 +2,10 @@ import React from "react";
 import {Avatar, Box, Stack, TextareaAutosize, Typography} from "@mui/material";
 
 
+/**
+ * A component that displays a single entity's primary information.
+ * Displays it as its name + its image.
+ */
 class EntityPrimaryCard extends React.Component<any, any> {
 
     render() {

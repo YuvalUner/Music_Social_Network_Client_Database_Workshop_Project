@@ -3,6 +3,10 @@ import {Divider, Drawer, Toolbar} from "@mui/material";
 import Recommendations from "./components/recommendations";
 import TopArtists from "./components/top-artists";
 
+/**
+ * The discover tab on the left hand side of the screen.
+ * Contains recommendations for the user and a list of the top artists.
+ */
 class DiscoverTab extends React.Component<any, any>{
 
     render(){

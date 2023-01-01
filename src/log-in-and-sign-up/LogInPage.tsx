@@ -5,7 +5,9 @@ import {NavLink} from "react-router-dom";
 import configData from "../config.json";
 import {Alert, AlertTitle} from "@mui/material";
 
-
+/**
+ * The application's log in page.
+ */
 class LogInPage extends React.Component<any, any>{
 
     constructor(props: any) {
@@ -21,10 +23,18 @@ class LogInPage extends React.Component<any, any>{
         };
     }
 
+    /**
+     * Sets the password state to the user's input.
+     * @param e
+     */
     setPassword = (e: any): void => {
         this.setState({password: e.target.value});
     }
 
+    /**
+     * Sets the username state to the user's input.
+     * @param e
+     */
     setUsername = (e: any): void => {
         this.setState({username: e.target.value});
     }

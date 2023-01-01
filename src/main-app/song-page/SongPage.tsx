@@ -11,6 +11,10 @@ import PageEnum from "../page-enum";
 import ArtistsListWithLinks from "../general-components/artists-list-with-links";
 import {millisToMinutesAndSeconds} from "../general-components/time-converter";
 
+/**
+ * SongPage is the page that displays the song's information.
+ * It displays information such as the song's name, album, artists, duration, and rating, and the comments on it.
+ */
 class SongPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -26,6 +30,11 @@ class SongPage extends React.Component<any, any> {
         };
     }
 
+    // /**
+    //  * getSong gets the song's information from the API.
+    //  * If successful, it sets the song's information to the state.
+    //  * Regardless of success, it sets the songLoading state to false, so that the page can be rendered.
+    //  */
     // getSong = async (): Promise<void> => {
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_by_name_and_album/${this.props.song_name}/${this.props.album_name}`, {
     //         method: "GET",
@@ -43,6 +52,10 @@ class SongPage extends React.Component<any, any> {
         this.setState({songLoading: false, song: songExample});
     }
 
+    // /***
+    //  * getRating gets the song's rating from the API.
+    //  * If successful, it sets the song's rating to the state.
+    //  */
     // getRating = async (): Promise<void> => {
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.ratingsApiUrl}/song_rating/${this.props.songName}/${this.props.albumName}`, {
     //         method: "GET",
@@ -62,12 +75,21 @@ class SongPage extends React.Component<any, any> {
         await this.getRating();
     }
 
+    /**
+     * Changes the current page to the album page.
+     * Should happen upon clicking the album name.
+     */
     goToAlbumPage = (): void => {
         this.props.setAlbumName(this.props.albumName);
         this.props.setPage(PageEnum.ALBUM);
     }
 
 
+    /**
+     * Creates the table displayed in the song's page.
+     * The table contains information about the song, such as:
+     * The song's artists, album, duration, rating, release date, etc.
+     */
     createSongInfoTable = (): JSX.Element => {
         return (
             <div>
@@ -120,6 +142,11 @@ class SongPage extends React.Component<any, any> {
         );
     }
 
+    // /**
+    //  * Adds the song to the user's favorite songs list in the API.
+    //  * If successful, it sets the addToFavoriteSuccess state to true, so that the success message will be displayed.
+    //  * If unsuccessful, it sets the addToFavoriteError state to true, so that the error message will be displayed.
+    //  */
     // addToFavorites = async (): Promise<void> => {
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.favoriteSongsApiUrl}/`, {
     //         method: "POST",
@@ -153,9 +180,8 @@ class SongPage extends React.Component<any, any> {
                 <Stack direction={"row"} spacing={6}>
                     <EntityPrimaryCard
                         name={this.state.song.song_name}
-                        albumName={this.props.albumName}
-                        artists={this.props.artists}
                     />
+                    {/* Stack for the add to favorites button, and the alert it displays upon success or failure */}
                     <Stack justifyContent={"center"}>
                         <Button
                             variant={"outlined"}
@@ -174,6 +200,7 @@ class SongPage extends React.Component<any, any> {
                         </Alert>}
                     </Stack>
                 </Stack>
+                {/*While loading the page, display a loading icon.*/}
                 {this.state.songLoading ? <div>
                     <div>
                         Loading...

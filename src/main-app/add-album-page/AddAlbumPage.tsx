@@ -2,6 +2,9 @@ import React from "react";
 import {Alert, Button, Divider, FormControl, Stack, TextField} from "@mui/material";
 import configData from "../../config.json";
 
+/**
+ * A page with a form for adding an album to the database.
+ */
 class AddAlbumPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -14,6 +17,9 @@ class AddAlbumPage extends React.Component<any, any> {
         }
     }
 
+    /**
+     * Checks if the user's input is valid.
+     */
     checkValidity = (): boolean => {
         if (this.state.albumName === "") {
             this.setState({albumNameEmptyError: true});
@@ -24,6 +30,11 @@ class AddAlbumPage extends React.Component<any, any> {
         }
     }
 
+    // /**
+    //  * Sends a request to the server to add an album to the database.
+    //  * Sets the state of the component to show a success or error message.
+    //  * @param e
+    //  */
     // addAlbum = async (e: any): Promise<void> => {
     //     e.preventDefault();
     //     if (this.checkValidity()) {

@@ -1,3 +1,7 @@
+/**
+ * Maps between the numerical values of the scales in the database and the letters used for them.
+ * @param scaleNum
+ */
 function scaleNumToWordMapper(scaleNum: number): string {
     switch(scaleNum) {
         case 1:

@@ -6,6 +6,9 @@ import {Md5} from "ts-md5";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import configData from "../../../config.json";
 
+/**
+ * The recommendations part of the discover tab.
+ */
 class Recommendations extends React.Component<any, any>{
 
     constructor(props: any) {
@@ -16,6 +19,9 @@ class Recommendations extends React.Component<any, any>{
         };
     }
 
+    // /**
+    //  * Makes a request to the backend to get the recommendations.
+    //  */
     // getRecommendations = async (): Promise<void> => {
     //     this.setState({recommendationsLoading: true});
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_reccomendations/${this.props.username}/10`, {
@@ -34,6 +40,12 @@ class Recommendations extends React.Component<any, any>{
         this.setState({recommendationsLoading: false, recommendations: recommendations});
     }
 
+    /**
+     * Goes to the song page of the song that was clicked.
+     * @param song_name
+     * @param album_name
+     * @param artists
+     */
     switchToSongPage = (song_name: string, album_name: string, artists: string | [string]): void => {
         this.props.setSongName(song_name);
         this.props.setAlbumName(album_name);
@@ -41,6 +53,9 @@ class Recommendations extends React.Component<any, any>{
         this.props.setPage(PageEnum.SONG);
     }
 
+    /**
+     * Creates the list of recommendations.
+     */
     createRecommendationsList = (): JSX.Element => {
         return(
             <div>
@@ -87,6 +102,7 @@ class Recommendations extends React.Component<any, any>{
                 >
                     <RefreshIcon color={"primary"}/>
                 </IconButton>
+                {/*Before loading*/}
                 {this.state.recommendationsLoading &&
                     <div>
                         <div className={"mb-5"}>
@@ -94,6 +110,7 @@ class Recommendations extends React.Component<any, any>{
                         </div>
                         <CircularProgress/>
                     </div>}
+                {/*After loading*/}
                 {!this.state.recommendationsLoading &&
                     Object.keys(this.state.recommendations).length === 0
                     && <div>No recommendations found</div>}

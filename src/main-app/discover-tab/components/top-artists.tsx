@@ -4,6 +4,9 @@ import PageEnum from "../../page-enum";
 import {CircularProgress, List, ListItemButton, ListItemText} from "@mui/material";
 import {Md5} from "ts-md5";
 
+/**
+ * The top artists part of the discover tab.
+ */
 class TopArtists extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -15,6 +18,10 @@ class TopArtists extends React.Component<any, any> {
     }
 
 
+    // /**
+    //  * Makes a request to the backend to get the top artists.
+    //  * If fails, assume the server has gone up in flames and everyone is dead.
+    //  */
     // getTopArtists = async (): Promise<void> => {
     //     let response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/top_rated/10`, {
     //         method: "GET"
@@ -27,16 +34,24 @@ class TopArtists extends React.Component<any, any> {
         this.setState({topArtistsLoading: false, topArtists: artists});
     }
 
+    /**
+     * Goes to the artist page of the artist that was clicked.
+     * @param artist
+     */
     switchToArtistPage = (artist: string): void => {
         this.props.setArtistName(artist);
         this.props.setPage(PageEnum.ARTIST);
     }
 
+    /**
+     * Creates the list of top artists.
+     */
     createTopArtistsList = (): JSX.Element => {
         return (
             <div>
                 <List>
                     {
+                        // Doing it this way, because someone returned an array inside a singular key, for some reason.
                         Object.keys(this.state.topArtists).map((key: any) => {
                             return (
                                 <div key={key}>

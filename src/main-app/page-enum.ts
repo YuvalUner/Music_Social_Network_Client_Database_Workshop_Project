@@ -1,3 +1,7 @@
+/**
+ * Enum for the pages in the app.
+ * Used to determine which page to show.
+ */
 enum PageEnum{
     HOME = 0,
     SONG = 1,
