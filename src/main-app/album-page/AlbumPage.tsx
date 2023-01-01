@@ -7,6 +7,10 @@ import album from "./album_example.json";
 import ArtistsListWithLinks from "../general-components/artists-list-with-links";
 import PageEnum from "../page-enum";
 
+/**
+ * The page for displaying an album.
+ * Should display the album's name, artists, and tracks.
+ */
 class AlbumPage extends React.Component<any, any>{
 
     constructor(props: any) {
@@ -18,12 +22,18 @@ class AlbumPage extends React.Component<any, any>{
         }
     }
 
+    // /**
+    //  * Gets the album details from the API.
+    //  */
     // getAlbumDetails = async (): Promise<void> => {
     //     const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/search/${this.props.album_name}`);
     //     const data = await response.json();
     //     this.setState({album: data});
     // }
-
+    //
+    // /**
+    //  * Gets the songs in the album from the API.
+    //  */
     // getAlbumSongs = async (): Promise<void> => {
     //     const response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_in_album/${this.props.album_name}`);
     //     const data = await response.json();
@@ -44,6 +54,12 @@ class AlbumPage extends React.Component<any, any>{
         this.setState({albumLoading: false});
     }
 
+    /**
+     * Goes to the page of the song that was clicked.
+     * @param songName
+     * @param albumName
+     * @param artistName
+     */
     goToSong = (songName: string, albumName: string, artistName: string | string[]): void => {
         this.props.setSongName(songName);
         this.props.setAlbumName(albumName);
@@ -51,6 +67,9 @@ class AlbumPage extends React.Component<any, any>{
         this.props.setPage(PageEnum.SONG);
     }
 
+    /**
+     * Creates the list of songs in the album.
+     */
     createSongsList = (): JSX.Element => {
         return (
             <>
@@ -67,6 +86,9 @@ class AlbumPage extends React.Component<any, any>{
         );
     }
 
+    /**
+     * Creates the table displayed in the album page.
+     */
     createAlbumTable = (): JSX.Element => {
         return(
           <Table>

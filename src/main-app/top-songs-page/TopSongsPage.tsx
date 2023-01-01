@@ -6,6 +6,9 @@ import SongWithAlbumAndArtistsList from "../general-components/song-with-album-a
 import topAllTime from "./top_all_tme_example.json";
 import top2020 from "./top_2020_example.json";
 
+/**
+ * The page that allows choosing a year and shows the top songs for that year.
+ */
 class TopSongsPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -19,6 +22,9 @@ class TopSongsPage extends React.Component<any, any> {
         };
     }
 
+    // /**
+    //  * Gets the range of years that have songs in the database from the server.
+    //  */
     // getYearRange = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_max_min_years`)
     //     const data: any = await response.json();
@@ -42,9 +48,14 @@ class TopSongsPage extends React.Component<any, any> {
         await this.getYearRange();
     }
 
+    // /**
+    //  * Get tops songs from a certain year / all time from the server.
+    //  * @param e the event that triggered the function.
+    //  */
     // getSongs = async (e): Promise<void> => {
     //     e.preventDefault();
     //     this.setState({songs_loading: true});
+    //     // Decide which year to get songs from and format it.
     //     let methodPath = this.state.selected_year === "All Times" ? "/top_songs" : "/top_songs_per_year";
     //     methodPath += "/100"
     //     methodPath += this.state.selected_year === "All Times" ? "" : `/${this.state.selected_year}`;
@@ -67,6 +78,7 @@ class TopSongsPage extends React.Component<any, any> {
     render() {
         return (
             <>
+                {/*Display a loading icon while loading the year range*/}
                 {this.state.song_years_loading ?
                     <div>
                         <div>
@@ -75,6 +87,7 @@ class TopSongsPage extends React.Component<any, any> {
                         <CircularProgress/>
                     </div>
                     :
+                    // After loading the year range, display the form to select the year.
                     <form onSubmit={async (e) => await this.getSongs(e)}>
                         <Stack direction={"row"} spacing={5}>
                             <FormControl>
@@ -99,6 +112,7 @@ class TopSongsPage extends React.Component<any, any> {
                             </Button>
                         </Stack>
                     </form>}
+                {/*Display a loading icon while the songs load*/}
                 {this.state.songs_loading ?
                     <div>
                         <div>
@@ -106,7 +120,9 @@ class TopSongsPage extends React.Component<any, any> {
                         </div>
                         <CircularProgress/>
                     </div>
-                    : <SongWithAlbumAndArtistsList
+                    // Display the songs if they are loaded. If none was found, display a message.
+                    : this.state.songs.length > 0 ?
+                    <SongWithAlbumAndArtistsList
                         searchResults={this.state.songs}
                         setSongName={this.props.setSongName}
                         setArtistName={this.props.setArtistName}
@@ -114,6 +130,7 @@ class TopSongsPage extends React.Component<any, any> {
                         setPage={this.props.setPage}
                         showRating={true}
                     />
+                    : <div>No songs found</div>
                 }
             </>
         );

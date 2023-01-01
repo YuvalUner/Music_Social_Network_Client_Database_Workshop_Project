@@ -8,6 +8,10 @@ import artistSpotifyId from "./spotify_id_example.json";
 import PageEnum from "../page-enum";
 import {Md5} from "ts-md5";
 
+/**
+ * The page that displays the artist's information.
+ * Should display their name, albums, rating and spotify link.
+ */
 class ArtistPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -20,18 +24,27 @@ class ArtistPage extends React.Component<any, any> {
         }
     }
 
+    // /**
+    //  * Makes a request to the backend to get the artist's albums.
+    //  */
     // getArtistAlbums = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.artist_name}`);
     //     const data: any = await response.json();
     //     this.setState({artistAlbums: data});
     // }
     //
+    // /**
+    //  * Makes a request to the backend to get the artist's rating.
+    //  */
     // getArtistRating = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/rating/${this.props.artist_name}`);
     //     const data: any = await response.json();
     //     this.setState({artistRating: parseFloat(data.rating).toFixed(2)});
     // }
     //
+    // /**
+    //  * Makes a request to the backend to get the artist's Spotify ID.
+    //  */
     // getArtistSpotifyId = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/spotify_id/${this.props.artist_name}`);
     //     const data: any = await response.json();
@@ -57,11 +70,18 @@ class ArtistPage extends React.Component<any, any> {
         this.setState({artistLoading: false});
     }
 
+    /**
+     * Goes to the album page of the album that was clicked.
+     * @param album_name
+     */
     goToAlbum = (album_name: string): void => {
         this.props.setAlbumName(album_name);
         this.props.setPage(PageEnum.ALBUM);
     }
 
+    /**
+     * Creates the list of albums that the artist has.
+     */
     createAlbumsList = (): JSX.Element => {
         return (
             <>
@@ -76,6 +96,9 @@ class ArtistPage extends React.Component<any, any> {
         );
     }
 
+    /**
+     * Creates the table displayed in the artist's page.
+     */
     createArtistTable = (): JSX.Element => {
         return (
             <Table>

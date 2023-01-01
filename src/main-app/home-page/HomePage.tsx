@@ -3,6 +3,9 @@ import {Box, CircularProgress, IconButton, Stack} from "@mui/material";
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
+/**
+ * The home page of the app.
+ */
 class HomePage extends React.Component<any, any> {
 
     render() {
@@ -31,6 +34,7 @@ class HomePage extends React.Component<any, any> {
                         </div>
                         <CircularProgress/>
                     </div>
+                    // Display the random songs list.
                     : <SongWithAlbumAndArtistsList
                         searchResults={this.props.homeSearchResults}
                         setSongName={this.props.setSongName}

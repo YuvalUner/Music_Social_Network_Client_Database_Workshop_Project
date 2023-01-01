@@ -13,6 +13,9 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import PageEnum from "../page-enum";
 
+/**
+ * The tab that allows the user to input search queries and choose the search type.
+ */
 class SearchTab extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -23,6 +26,9 @@ class SearchTab extends React.Component<any, any> {
         }
     }
 
+    /**
+     * Checks the the search query is valid.
+     */
     checkValidity = (): boolean => {
         if (this.props.searchQuery === "") {
             this.setState({searchError: true});
@@ -33,6 +39,10 @@ class SearchTab extends React.Component<any, any> {
         }
     }
 
+    /**
+     * Handles the search button being clicked.
+     * @param e
+     */
     onSubmit = (e: any): void => {
         e.preventDefault();
         if (this.checkValidity()) {
@@ -41,6 +51,10 @@ class SearchTab extends React.Component<any, any> {
         }
     }
 
+    /**
+     * Changes the search type.
+     * @param e
+     */
     setSearchType = (e: any): void => {
         this.setState({searchType: (e.target as HTMLInputElement).value});
     }

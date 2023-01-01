@@ -15,6 +15,9 @@ import artistAlbums from "./artist_albums_example.json";
 import SendIcon from '@mui/icons-material/Send';
 import {minutesAndSecondsToMillis} from "../general-components/time-converter";
 
+/**
+ * A page with a form for adding a song to the database.
+ */
 class AddSongPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -40,12 +43,18 @@ class AddSongPage extends React.Component<any, any> {
         }
     }
 
+    // /**
+    //  * Gets the list of genres from the database.
+    //  */
     // getGenresList = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.genresApiUrl}/all`);
     //     let genresList: any = await response.json();
     //     this.setState({genreList: genresList});
     // }
-
+    //
+    // /**
+    //  * Gets the list of albums for the current artist from the database.
+    //  */
     // getArtistAlbums = async (): Promise<void> => {
     //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.username}`);
     //     let data: any = await response.json();
@@ -75,6 +84,9 @@ class AddSongPage extends React.Component<any, any> {
         this.setState({pageLoading: false});
     }
 
+    /**
+     * Checks to make sure that the input data is valid and not empty or not following the correct format.
+     */
     checkValidity = (): boolean => {
         let valid: boolean = true;
         if (this.state.song_name === "") {
@@ -96,6 +108,11 @@ class AddSongPage extends React.Component<any, any> {
         return valid;
     }
 
+    /**
+     * Sends a request to the server to add the song to the database.
+     * Also sends a request to link the artist to the song's genre.
+     * @param e
+     */
     addSong = async (e): Promise<void> => {
         e.preventDefault();
         if (this.checkValidity()) {
@@ -155,6 +172,7 @@ class AddSongPage extends React.Component<any, any> {
                     </div>
                     : <form onSubmit={async e => this.addSong(e)}>
                         <Stack spacing={2}>
+                            {/*Song name input field*/}
                             <TextField
                                 variant={"outlined"}
                                 label={"Song Name"}
@@ -167,6 +185,7 @@ class AddSongPage extends React.Component<any, any> {
                                 }}
                                 required
                             />
+                            {/*Album select field*/}
                             <FormControl sx={{
                                 marginRight: 2,
                             }} error={this.state.albumNameEmptyError} required>
@@ -189,6 +208,7 @@ class AddSongPage extends React.Component<any, any> {
                                     {this.state.albumNameEmptyError ? "This field is required" : ""}
                                 </FormHelperText>
                             </FormControl>
+                            {/*Genre select field*/}
                             <FormControl error={this.state.genreNameEmptyError} required
                                          sx={{
                                              marginRight: 2,
@@ -213,6 +233,7 @@ class AddSongPage extends React.Component<any, any> {
                                     {this.state.genreNameEmptyError ? "This field is required" : ""}
                                 </FormHelperText>
                             </FormControl>
+                            {/*Song spotify id field*/}
                             <TextField
                                 variant={"outlined"}
                                 label={"Spotify ID"}
@@ -222,6 +243,7 @@ class AddSongPage extends React.Component<any, any> {
                                     marginRight: 2,
                                 }}
                             />
+                            {/*Song duration field*/}
                             <TextField
                                 variant={"outlined"}
                                 label={"Duration"}
@@ -233,6 +255,7 @@ class AddSongPage extends React.Component<any, any> {
                                     marginRight: 2,
                                 }}
                             />
+                            {/*Song energy field*/}
                             <TextField
                                 variant={"outlined"}
                                 label={"Energy"}
@@ -243,6 +266,7 @@ class AddSongPage extends React.Component<any, any> {
                                     marginRight: 2,
                                 }}
                             />
+                            {/*Song key field*/}
                             <TextField
                                 variant={"outlined"}
                                 label={"Song key"}
@@ -252,6 +276,7 @@ class AddSongPage extends React.Component<any, any> {
                                     marginRight: 2,
                                 }}
                             />
+                            {/*Song in minor or major selector*/}
                             <FormControl>
                                 <RadioGroup
                                     row
@@ -273,6 +298,7 @@ class AddSongPage extends React.Component<any, any> {
                                     }}/>} label={"Minor"}/>
                                 </RadioGroup>
                             </FormControl>
+                            {/*Submit button and success and failure alerts*/}
                             <Button variant={"contained"} type={"submit"} endIcon={<SendIcon/>}>
                                 Add Song
                             </Button>

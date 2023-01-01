@@ -18,6 +18,11 @@ import SearchResultsPage from "./search/SearchResultsPage";
 import TopSongsPage from "./top-songs-page/TopSongsPage";
 import configData  from "../config.json";
 
+/**
+ * The main app component.
+ * Responsible for rendering all other components in the app, and choosing which ones to render.
+ * Also responsible for handling the state of the app, as well as fetching results for the home page.
+ */
 class MainApp extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -37,30 +42,58 @@ class MainApp extends React.Component<any, any> {
     discoverTabWidth = 20;
     sideTabWidth = 20;
 
+    /**
+     * Sets the name or names of the artist(s) to be displayed in the current page, if they are needed.
+     * @param artist_name a string or list of strings representing the name(s) of the artist(s) to be displayed.
+     */
     setArtistName = (artist_name: string | [string]): void => {
         this.setState({artist_name: artist_name});
     }
 
+    /**
+     * Sets the name of the song to be displayed in the current page, if it is needed.
+     * @param song_name
+     */
     setSongName = (song_name: string): void => {
         this.setState({song_name: song_name});
     }
 
+    /**
+     * Sets the name of the album to be displayed in the current page, if it is needed.
+     * @param album_name
+     */
     setAlbumName = (album_name: string): void => {
         this.setState({album_name: album_name});
     }
 
+    /**
+     * Sets the search type to be used when searching for songs.
+     * @param searchType a string representing the search type to be used, either "1" or "0".
+     * Done as a string due to the radio buttons settings string values instead of integers.
+     */
     setSearchType = (searchType: string): void => {
         this.setState({searchType: parseInt(searchType)});
     }
 
+    /**
+     * Sets the search query to be used when searching for songs.
+     * @param e an event object containing the search query.
+     */
     setSearchQuery = (e: any): void => {
         this.setState({searchQuery: e.target.value});
     }
 
+    /**
+     * Sets the current page to be displayed.
+     * @param page A PageEnum value representing the page to be displayed.
+     */
     setPage = (page: PageEnum): void => {
         this.setState({page: page});
     }
 
+    /**
+     * Fetches the results to be displayed on the home page from the API.
+     */
     getHomePageResults = async (): Promise<void> => {
         this.setState({homeLoading: true});
         const response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/random/100`, {
@@ -81,6 +114,7 @@ class MainApp extends React.Component<any, any> {
                 }}
             >
                 <CssBaseline />
+                {/*Discover tab displayed on the left hand side of the page*/}
                 <DiscoverTab
                     username={this.props.username}
                     setArtistName={this.setArtistName}
@@ -99,6 +133,7 @@ class MainApp extends React.Component<any, any> {
                            divider={<Divider orientation="vertical" flexItem/>}
                            spacing={2}
                     >
+                        {/*Search tab displayed on the top of the page, between discover tab and menu*/}
                         <SearchTab
                             searchQuery={this.state.searchQuery}
                             setSearchQuery={this.setSearchQuery}
@@ -106,6 +141,8 @@ class MainApp extends React.Component<any, any> {
                             setSearchType={this.setSearchType}
                             setPage={this.setPage}
                         />
+                        {/*Each condition is for a page displayed in the center of the page, depending on the current
+                        value of this.state.page */}
                         {this.state.page === PageEnum.HOME && <HomePage
                             refreshHomePage={this.getHomePageResults}
                             homeSearchResults={this.state.homeSearchResults}
@@ -172,8 +209,10 @@ class MainApp extends React.Component<any, any> {
                         />}
                     </Stack>
                 </Box>
+                {/*The menu displayed on the right hand side of the page*/}
                 <MenuSideBar
                     username={this.props.username}
+                    setArtistName={this.setArtistName}
                     setPage={this.setPage}
                     width={this.sideTabWidth}
                 />

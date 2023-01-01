@@ -5,11 +5,10 @@ import {NavLink} from "react-router-dom";
 import configData from "../config.json";
 import {Alert, AlertTitle} from "@mui/material";
 
+/**
+ * The application's sign up page.
+ */
 class SignUpPage extends React.Component<any, any> {
-    /**
-     * The application's sign up page
-     * @param props
-     */
 
     constructor(props: any) {
         super(props);
@@ -26,14 +25,26 @@ class SignUpPage extends React.Component<any, any> {
     }
 
 
+    /**
+     * Sets the password state to the user's input.
+     * @param e
+     */
     setPassword = (e: any): void => {
         this.setState({password: e.target.value});
     }
 
+    /**
+     * Sets the password confirmation state to the user's input.
+     * @param e
+     */
     setPasswordConfirmation = (e: any): void => {
         this.setState({passwordConfirmation: e.target.value});
     }
 
+    /**
+     * Sets the username state to the user's input.
+     * @param e
+     */
     setUsername = (e: any): void => {
         this.setState({username: e.target.value});
     }

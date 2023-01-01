@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * The page for displaying album recommendations.
+ */
 class AlbumRecommendationsPage extends React.Component<any, any>{
 
     render() {

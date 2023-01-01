@@ -5,6 +5,10 @@ import searchResults from "./approx_search_results_example.json";
 import {Box, CircularProgress, List, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
 
+/**
+ * The page that displays the results of a search query.
+ * Also responsible for making the search request to the backend.
+ */
 class SearchResultsPage extends React.Component<any, any> {
 
     constructor(props: any) {
@@ -15,7 +19,11 @@ class SearchResultsPage extends React.Component<any, any> {
         }
     }
 
+    /**
+     * Makes a request to the backend to get the search results.
+     */
     getSearchResults = async (): Promise<void> => {
+        // Decide the search type and send the request to the backend.
         let searchTypeStr: string = this.props.searchType === SearchTypes.EXACT ? "exact" : "approx";
         let response: Response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/${searchTypeStr}/${this.props.searchQuery}`, {
             method: "GET",

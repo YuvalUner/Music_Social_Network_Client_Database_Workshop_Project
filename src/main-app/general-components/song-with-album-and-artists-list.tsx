@@ -3,8 +3,18 @@ import {List, ListItemButton, ListItemText, Typography} from "@mui/material";
 import {Md5} from "ts-md5";
 import PageEnum from "../page-enum";
 
+/**
+ * A list of songs with their album and artist listed.
+ * Can also optionally display the song's rating.
+ */
 class SongWithAlbumAndArtistsList extends React.Component<any, any>{
 
+    /**
+     * Go to the song page for a specific song.
+     * @param song_name
+     * @param album_name
+     * @param artists
+     */
     goToSongPage = (song_name: string, album_name: string, artists: string | [string]): void => {
         this.props.setSongName(song_name);
         this.props.setAlbumName(album_name);
