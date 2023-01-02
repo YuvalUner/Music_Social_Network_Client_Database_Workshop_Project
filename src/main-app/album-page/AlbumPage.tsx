@@ -26,7 +26,7 @@ class AlbumPage extends React.Component<any, any>{
      * Gets the album details from the API.
      */
     getAlbumDetails = async (): Promise<void> => {
-        const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/search/${this.props.album_name}`);
+        const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/search/${this.props.albumName}`);
         const data = await response.json();
         this.setState({album: data});
     }
@@ -35,7 +35,7 @@ class AlbumPage extends React.Component<any, any>{
      * Gets the songs in the album from the API.
      */
     getAlbumSongs = async (): Promise<void> => {
-        const response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_in_album/${this.props.album_name}`);
+        const response = await fetch(`${configData.apiBaseUrl}${configData.songsApiUrl}/get_in_album/${this.props.albumName}`);
         const data = await response.json();
         this.setState({albumSongs: data});
     }
@@ -48,11 +48,11 @@ class AlbumPage extends React.Component<any, any>{
     //     this.setState({albumSongs: songsInAlbum});
     // }
     //
-    // async componentDidMount() {
-    //     await this.getAlbumDetails();
-    //     await this.getAlbumSongs();
-    //     this.setState({albumLoading: false});
-    // }
+    async componentDidMount() {
+        await this.getAlbumDetails();
+        await this.getAlbumSongs();
+        this.setState({albumLoading: false});
+    }
 
     /**
      * Goes to the page of the song that was clicked.
