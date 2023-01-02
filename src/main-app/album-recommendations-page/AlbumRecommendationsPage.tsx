@@ -16,6 +16,10 @@ class AlbumRecommendationsPage extends React.Component<any, any>{
         };
     }
 
+    /**
+     * Makes a request to the backend to get the album's rating.
+     * @param album
+     */
     getAlbumRating = async (album): Promise<number> => {
         let response: Response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/search/${album.album_name}`, {
             method: "GET",
@@ -30,6 +34,10 @@ class AlbumRecommendationsPage extends React.Component<any, any>{
         }
     }
 
+    /**
+     * Makes a request to the backend to get the list of artists related to the album.
+     * @param album
+     */
     getAlbumArtists = async (album): Promise<string[]> => {
         let response: Response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/get_artists/${album.album_name}`, {
             method: "GET",
@@ -71,12 +79,20 @@ class AlbumRecommendationsPage extends React.Component<any, any>{
         await this.getAlbumRecommendations();
     }
 
+    /**
+     * Goes to the album page for the album that was clicked.
+     * @param album_name
+     * @param artists
+     */
     goToAlbumPage = (album_name: string, artists: string | string[]): void => {
         this.props.setArtistName(artists)
         this.props.setAlbumName(album_name);
         this.props.setPage(PageEnum.ALBUM);
     }
 
+    /**
+     * Renders the album recommendations list.
+     */
     createAlbumRecommendationsList = (): JSX.Element => {
         return(
             <List>

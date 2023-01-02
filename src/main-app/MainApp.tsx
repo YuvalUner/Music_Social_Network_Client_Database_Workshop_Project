@@ -16,7 +16,7 @@ import SearchTypes from "./search/search-type-enum";
 import SearchTab from "./search/SearchTab";
 import SearchResultsPage from "./search/SearchResultsPage";
 import TopSongsPage from "./top-songs-page/TopSongsPage";
-import configData  from "../config.json";
+import configData from "../config.json";
 
 /**
  * The main app component.

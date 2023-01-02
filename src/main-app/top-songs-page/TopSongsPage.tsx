@@ -1,10 +1,7 @@
 import React from "react";
 import configData from "../../config.json";
 import {Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, Stack} from "@mui/material";
-import YearRange from "./year_range_example.json"
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
-import topAllTime from "./top_all_tme_example.json";
-import top2020 from "./top_2020_example.json";
 
 /**
  * The page that allows choosing a year and shows the top songs for that year.

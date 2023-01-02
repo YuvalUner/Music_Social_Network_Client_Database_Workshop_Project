@@ -2,7 +2,6 @@ import React from 'react';
 import {Box, CircularProgress, Stack} from "@mui/material";
 import configData from "../../config.json";
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
-import favoriteSongs from "./favorite_songs_example.json";
 
 /**
  * The page that displays the user's favorite songs.

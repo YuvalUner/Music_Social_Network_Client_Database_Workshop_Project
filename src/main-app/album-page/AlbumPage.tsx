@@ -2,8 +2,6 @@ import React from 'react';
 import {CircularProgress, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
 import EntityPrimaryCard from "../general-components/entity-primary-card";
 import configData from "../../config.json";
-import songsInAlbum from "./songs_in_album_example.json";
-import album from "./album_example.json";
 import ArtistsListWithLinks from "../general-components/artists-list-with-links";
 import PageEnum from "../page-enum";
 

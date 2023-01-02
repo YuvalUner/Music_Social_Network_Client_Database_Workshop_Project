@@ -1,17 +1,20 @@
 import React from "react";
 import {
-    Stack,
-    TextField,
-    FormControl,
-    Select,
-    MenuItem,
-    InputLabel,
+    Alert,
+    Button,
     CircularProgress,
-    FormHelperText, RadioGroup, FormControlLabel, Radio, Button, Alert
+    FormControl,
+    FormControlLabel,
+    FormHelperText,
+    InputLabel,
+    MenuItem,
+    Radio,
+    RadioGroup,
+    Select,
+    Stack,
+    TextField
 } from "@mui/material";
 import configData from "../../config.json";
-import genreList from "./genre_list.json";
-import artistAlbums from "./artist_albums_example.json";
 import SendIcon from '@mui/icons-material/Send';
 import {minutesAndSecondsToMillis} from "../general-components/time-converter";
 
@@ -43,40 +46,40 @@ class AddSongPage extends React.Component<any, any> {
         }
     }
 
-    // /**
-    //  * Gets the list of genres from the database.
-    //  */
-    // getGenresList = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.genresApiUrl}/all`);
-    //     let genresList: any = await response.json();
-    //     this.setState({genreList: genresList});
-    // }
-    //
-    // /**
-    //  * Gets the list of albums for the current artist from the database.
-    //  */
-    // getArtistAlbums = async (): Promise<void> => {
-    //     const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.username}`);
-    //     let data: any = await response.json();
-    //     let albumNames: string[] = [];
-    //     data.forEach((album: any) => {
-    //         albumNames.push(album.album_name);
-    //     });
-    //     this.setState({artistAlbums: albumNames});
-    // }
-
+    /**
+     * Gets the list of genres from the database.
+     */
     getGenresList = async (): Promise<void> => {
-        this.setState({genreList: genreList});
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.genresApiUrl}/all`);
+        let genresList: any = await response.json();
+        this.setState({genreList: genresList});
     }
 
+    /**
+     * Gets the list of albums for the current artist from the database.
+     */
     getArtistAlbums = async (): Promise<void> => {
-        let data: any = artistAlbums;
+        const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/albums/${this.props.username}`);
+        let data: any = await response.json();
         let albumNames: string[] = [];
         data.forEach((album: any) => {
             albumNames.push(album.album_name);
         });
         this.setState({artistAlbums: albumNames});
     }
+
+    // getGenresList = async (): Promise<void> => {
+    //     this.setState({genreList: genreList});
+    // }
+    //
+    // getArtistAlbums = async (): Promise<void> => {
+    //     let data: any = artistAlbums;
+    //     let albumNames: string[] = [];
+    //     data.forEach((album: any) => {
+    //         albumNames.push(album.album_name);
+    //     });
+    //     this.setState({artistAlbums: albumNames});
+    // }
 
     async componentDidMount() {
         await this.getGenresList();

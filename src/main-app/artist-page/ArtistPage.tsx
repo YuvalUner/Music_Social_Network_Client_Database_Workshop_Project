@@ -1,12 +1,8 @@
 import React from "react";
-import {Box, CircularProgress, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
+import {CircularProgress, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
 import EntityPrimaryCard from "../general-components/entity-primary-card";
 import configData from "../../config.json";
-import artistAlbums from "./artist_albums_example.json";
-import artistRating from "./rating_example.json";
-import artistSpotifyId from "./spotify_id_example.json";
 import PageEnum from "../page-enum";
-import {Md5} from "ts-md5";
 
 /**
  * The page that displays the artist's information.

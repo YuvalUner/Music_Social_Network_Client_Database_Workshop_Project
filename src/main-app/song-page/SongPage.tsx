@@ -1,8 +1,6 @@
 import React from "react";
-import songExample from "./song_example.json";
-import ratingExample from "./rating_example.json";
 import CommentsSection from "./components/comments-section";
-import {Alert, Box, Button, CircularProgress, Divider, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
+import {Alert, Button, CircularProgress, Divider, Link, Stack, Table, TableCell, TableRow} from "@mui/material";
 import EntityPrimaryCard from "../general-components/entity-primary-card";
 import scaleNumToWordMapper from "./scale-num-to-word-mapper";
 import StarIcon from '@mui/icons-material/Star';

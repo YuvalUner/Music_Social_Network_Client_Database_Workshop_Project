@@ -1,8 +1,7 @@
 import React from "react";
 import SearchTypes from "./search-type-enum";
 import configData from "../../config.json";
-import searchResults from "./approx_search_results_example.json";
-import {Box, CircularProgress, List, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
+import {Box, CircularProgress} from "@mui/material";
 import SongWithAlbumAndArtistsList from "../general-components/song-with-album-and-artists-list";
 
 /**
