@@ -11,6 +11,7 @@ class AddAlbumPage extends React.Component<any, any> {
         super(props);
         this.state = {
             albumName: "",
+            spotifyId: "",
             albumNameEmptyError: false,
             addAlbumSuccess: false,
             addAlbumError: false
@@ -38,18 +39,33 @@ class AddAlbumPage extends React.Component<any, any> {
     addAlbum = async (e: any): Promise<void> => {
         e.preventDefault();
         if (this.checkValidity()) {
-            const response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}`, {
+            let response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: this.state.albumName,
-                    artist: this.props.username
+                    album_name: this.state.albumName,
+                    album_spotify_id: this.state.spotifyId
                 })
             });
             if (response.status === 201) {
-                this.setState({addAlbumSuccess: true});
+                response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/add_artist_connector`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        album_name: this.state.albumName,
+                        artist_name: this.props.username
+                    })
+                });
+                if (response.status === 201) {
+                    this.setState({addAlbumSuccess: true});
+                }
+                else{
+                    this.setState({addAlbumError: true});
+                }
             }
             else {
                 this.setState({addAlbumError: true, addAlbumSuccess: false});
@@ -76,10 +92,17 @@ class AddAlbumPage extends React.Component<any, any> {
                         <TextField
                             variant={"outlined"}
                             label={"Album Name"}
+                            required={true}
                             error={this.state.albumNameEmptyError}
                             helperText={this.state.albumNameEmptyError ? "Album name cannot be empty" : ""}
                             value={this.state.albumName}
                             onChange={e => this.setState({albumName: e.target.value})}
+                        />
+                        <TextField
+                            variant={"outlined"}
+                            label={"Spotify id"}
+                            value={this.state.spotifyId}
+                            onChange={e => this.setState({spotifyId: e.target.value})}
                         />
                         <Button type={"submit"} variant={"contained"}>
                             Add Album
