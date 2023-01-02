@@ -110,9 +110,12 @@ class AlbumPage extends React.Component<any, any>{
               </TableRow>
               <TableRow>
                   <TableCell>Spotify link</TableCell>
-                  <TableCell><Link target={"_blank"} href={`https://open.spotify.com/album/${this.state.album.album_spotify_id}`}>
+                  <TableCell>
+                      {this.state.album.album_spotify_id !== "" && this.state.album.album_spotify_id !== null ?
+                      <Link target={"_blank"} href={`https://open.spotify.com/album/${this.state.album.album_spotify_id}`}>
                       https://open.spotify.com/album/{this.state.album.album_spotify_id}
-                  </Link></TableCell>
+                  </Link> : "No Spotify link available"}
+                  </TableCell>
               </TableRow>
           </Table>
         );
