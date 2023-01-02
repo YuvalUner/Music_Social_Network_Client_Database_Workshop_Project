@@ -1,5 +1,4 @@
 import React from "react";
-import commentsExample from "../comments_example.json";
 import {
     Avatar,
     CircularProgress,

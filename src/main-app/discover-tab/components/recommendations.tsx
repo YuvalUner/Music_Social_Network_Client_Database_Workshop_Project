@@ -1,5 +1,4 @@
 import React from "react";
-import recommendations from "../recommendations_example.json";
 import PageEnum from "../../page-enum";
 import {CircularProgress, IconButton, List, ListItemButton, ListItemText} from "@mui/material";
 import {Md5} from "ts-md5";

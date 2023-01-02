@@ -4,11 +4,10 @@ import {
     Divider,
     Drawer,
     List,
-    ListItem,
     ListItemAvatar,
+    ListItemButton,
     ListItemIcon,
     ListItemText,
-    ListItemButton,
     Toolbar
 } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
