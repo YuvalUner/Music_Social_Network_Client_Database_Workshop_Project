@@ -21,6 +21,7 @@ class SongPage extends React.Component<any, any> {
             comments: [],
             commentsLoading: true,
             song: {},
+            artists: [],
             songLoading: true,
             rating: NaN,
             addToFavoriteError: false,
@@ -39,10 +40,17 @@ class SongPage extends React.Component<any, any> {
         });
         if (response.status === 200) {
             let song: any = await response.json();
-            this.setState({song: song, songLoading: false});
+            this.setState({song: song});
         }
-        else{
-            this.setState({songLoading: false});
+    }
+
+    getSongArtists = async (): Promise<void> => {
+        let response: Response = await fetch(`${configData.apiBaseUrl}${configData.albumApiUrl}/get_artists/${this.props.albumName}`, {
+            method: "GET",
+        });
+        if (response.status === 200) {
+            let artists: any = await response.json();
+            this.setState({artists: artists});
         }
     }
 
@@ -74,6 +82,8 @@ class SongPage extends React.Component<any, any> {
     async componentDidMount() {
         await this.getSong();
         await this.getRating();
+        await this.getSongArtists();
+        this.setState({songLoading: false});
     }
 
     /**
@@ -98,7 +108,7 @@ class SongPage extends React.Component<any, any> {
                     <TableRow>
                         <TableCell>Artist(s)</TableCell>
                         <TableCell><ArtistsListWithLinks
-                            artists={this.props.artists}
+                            artists={this.state.artists}
                             setPage={this.props.setPage}
                             setArtistName={this.props.setArtistName}
                         /></TableCell>
