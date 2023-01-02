@@ -189,8 +189,17 @@ class MainApp extends React.Component<any, any> {
                             setArtistName={this.setArtistName}
                             setPage={this.setPage}
                         />}
-                        {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage/>}
-                        {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage/>}
+                        {this.state.page === PageEnum.ARTIST_RECOMMENDATION && <ArtistRecommendationPage
+                            username={this.props.username}
+                            setPage={this.setPage}
+                            setArtistName={this.setArtistName}
+                        />}
+                        {this.state.page === PageEnum.ALBUM_RECOMMENDATION && <AlbumRecommendationsPage
+                            username={this.props.username}
+                            setPage={this.setPage}
+                            setAlbumName={this.setAlbumName}
+                            setArtistName={this.setArtistName}
+                        />}
                         {this.state.page === PageEnum.ADD_ALBUM && <AddAlbumPage
                             username={this.props.username}
                         />}

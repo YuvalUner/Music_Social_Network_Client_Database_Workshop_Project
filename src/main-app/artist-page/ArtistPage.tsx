@@ -39,7 +39,12 @@ class ArtistPage extends React.Component<any, any> {
     getArtistRating = async (): Promise<void> => {
         const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/rating/${this.props.artistName}`);
         const data: any = await response.json();
-        this.setState({artistRating: parseFloat(data.rating).toFixed(2)});
+        if (data.rating !== null) {
+            this.setState({artistRating: parseFloat(data.rating).toFixed(2)});
+        }
+        else{
+            this.setState({artistRating: NaN});
+        }
     }
 
     /**
@@ -48,7 +53,12 @@ class ArtistPage extends React.Component<any, any> {
     getArtistSpotifyId = async (): Promise<void> => {
         const response: Response = await fetch(`${configData.apiBaseUrl}${configData.artistApiUrl}/spotify_id/${this.props.artistName}`);
         const data: any = await response.json();
-        this.setState({artistSpotifyId: data.spotify_id.replace("'", "").replace("'", "")});
+        if (data.spotify_id !== null) {
+            this.setState({artistSpotifyId: data.spotify_id.replace("'", "").replace("'", "")});
+        }
+        else{
+            this.setState({artistSpotifyId: ""});
+        }
     }
 
     // getArtistAlbums = async (): Promise<void> => {
@@ -104,13 +114,16 @@ class ArtistPage extends React.Component<any, any> {
             <Table>
                 <TableRow>
                     <TableCell>Rating</TableCell>
-                    <TableCell>{this.state.artistRating}</TableCell>
+                    <TableCell>{!isNaN(this.state.artistRating) ? this.state.artistRating : "No rating available"}</TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>Spotify ID</TableCell>
-                    <TableCell><Link target={"_blank"} href={`https://open.spotify.com/artist/${this.state.artistSpotifyId}`}>
+                    <TableCell>
+                        {this.state.artistSpotifyId !== "" ?
+                        <Link target={"_blank"} href={`https://open.spotify.com/artist/${this.state.artistSpotifyId}`}>
                         https://open.spotify.com/artist/{this.state.artistSpotifyId}
-                    </Link></TableCell>
+                    </Link> : "No Spotify ID available"}
+                    </TableCell>
                 </TableRow>
                 <TableRow>
                     <TableCell>Albums</TableCell>
