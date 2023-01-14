@@ -1,0 +1,10 @@
+.spoti-green{
+    background-color: darkseagreen;
+}
+
+.search-menu{
+    background-color: lightgreen;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}

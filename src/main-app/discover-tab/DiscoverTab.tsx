@@ -2,6 +2,7 @@ import React from "react";
 import {Divider, Drawer, Toolbar} from "@mui/material";
 import Recommendations from "./components/recommendations";
 import TopArtists from "./components/top-artists";
+import './DiscoverTab.css'
 
 /**
  * The discover tab on the left hand side of the screen.
@@ -12,6 +13,7 @@ class DiscoverTab extends React.Component<any, any>{
     render(){
         return (
             <Drawer
+                className={'discover-menu'}
             variant={"permanent"}
             anchor={"left"}
             sx={{
