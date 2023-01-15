@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import PageEnum from "../page-enum";
+import './SearchBar.css';
 
 /**
  * The tab that allows the user to input search queries and choose the search type.
@@ -73,6 +74,7 @@ class SearchTab extends React.Component<any, any> {
                     }}>
                         <TextField
                             label={"Search"}
+                            className={'search-field spoti-green'}
                             variant={"outlined"}
                             error={this.state.searchError}
                             helperText={this.state.searchError ? "Search query cannot be empty" : ""}
@@ -93,7 +95,9 @@ class SearchTab extends React.Component<any, any> {
                             }}
                         />
                     </FormControl>
-                    <FormControl>
+                    <FormControl
+                    className = 'search-menu'
+                    >
                         <RadioGroup
                             row
                             name={"search-type-radio"}
