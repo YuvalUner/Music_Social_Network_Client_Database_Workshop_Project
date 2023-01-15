@@ -1,5 +1,9 @@
 .discover-menu {
-    color: red;
+    color: darkgreen;
     height: 100px;
     width: 100px;
+}
+.drawer {
+    color: palevioletred;
+    background-color: #282c34;
 }
